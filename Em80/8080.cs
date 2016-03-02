@@ -666,7 +666,7 @@ namespace em80
                         registers.a = functions.sub_8(registers.a, registers.b, true);
                         break;
                     case 0x91:  /* SUB C */
-                        registers.a = functions.sub_8(registers.a, registers.a, true);
+                        registers.a = functions.sub_8(registers.a, registers.c, true);
                         break;
                     case 0x92:  /* SUB D */
                         registers.a = functions.sub_8(registers.a, registers.d, true);
@@ -687,28 +687,28 @@ namespace em80
                         registers.a = functions.sub_8(registers.a, registers.a, true);
                         break;
                     case 0x98:  /* SBB B */
-                        functions.sub_8(registers.a, (byte)(registers.b + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.b + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x99:  /* SBB C */
-                        functions.sub_8(registers.a, (byte)(registers.c + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.c + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9a:  /* SBB D */
-                        functions.sub_8(registers.a, (byte)(registers.d + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.d + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9b:  /* SBB E */
-                        functions.sub_8(registers.a, (byte)(registers.e + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.e + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9c:  /* SBB H */
-                        functions.sub_8(registers.a, (byte)(registers.h + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.h + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9d:  /* SBB L */
-                        functions.sub_8(registers.a, (byte)(registers.l + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.l + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9e:  /* SBB M */
-                        functions.sub_8(registers.a, (byte)(registers.m + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.m + (flags.c ? 1 : 0)), true);
                         break;
                     case 0x9f:  /* SBB A */
-                        functions.sub_8(registers.a, (byte)(registers.a + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(registers.a + (flags.c ? 1 : 0)), true);
                         break;
                     case 0xa0:  /* ANA B */
                         functions.ana(registers.b);
@@ -813,17 +813,19 @@ namespace em80
                         registers.bc = memory.pop();
                         break;
                     case 0xc2:  /* JNZ a16 */
-                        if (!flags.z) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (!flags.z) registers.pc = ushortTemp;
                         break;
                     case 0xc3:  /* JMP a16 */
                     case 0xcb:
                         registers.pc = memory.get_16();
                         break;
                     case 0xc4:  /* CNZ a16 */
+                        ushortTemp = memory.get_16();
                         if (!flags.z)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xc5:  /* PUSH B */
@@ -844,24 +846,26 @@ namespace em80
                         registers.pc = memory.pop();
                         break;
                     case 0xca:  /* JZ a16 */
-                        if (flags.z) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (flags.z) registers.pc = ushortTemp;
                         break;
                     case 0xcc:  /* CZ a16 */
+                        ushortTemp = memory.get_16();
                         if (flags.z)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xcd:  /* CALL a16 */
                     case 0xdd:
                     case 0xed:
                     case 0xfd:
-                        memory.push(registers.pc);
+                        memory.push((ushort)(registers.pc + 2));
                         registers.pc = memory.get_16();
                         break;
                     case 0xce:  /* ACI d8 */
-                        functions.add_8(registers.a, (byte)(memory.bytes[registers.pc++] + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.add_8(registers.a, (byte)(memory.bytes[registers.pc++] + (flags.c ? 1 : 0)), true);
                         break;
                     case 0xcf:  /* RST 1 */
                         memory.push(registers.pc);
@@ -874,16 +878,18 @@ namespace em80
                         registers.de = memory.pop();
                         break;
                     case 0xd2:  /* JNC a16 */
-                        if (!flags.c) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (!flags.c) registers.pc = ushortTemp;
                         break;
                     case 0xd3:  /* OUT d8 */
                         io.o(memory.bytes[registers.pc++]);
                         break;
                     case 0xd4:  /* CNC a16 */
+                        ushortTemp = memory.get_16();
                         if (!flags.c)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xd5:  /* PUSH D */
@@ -900,17 +906,22 @@ namespace em80
                         if (flags.c) registers.pc = memory.pop();
                         break;
                     case 0xda:  /* JC a16 */
-                        if (flags.c) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (flags.c) registers.pc = ushortTemp;
                         break;
                     case 0xdb:  /* IN d8 */
                         io.i(memory.bytes[registers.pc++]);
                         break;
                     case 0xdc:  /* CC a16 */
+                        ushortTemp = memory.get_16();
                         if (flags.c)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
+                        break;
+                    case 0xde:  /* SBI d8 */
+                        registers.a = functions.sub_8(registers.a, (byte)(memory.bytes[registers.pc++] + (flags.c ? 1 : 0)), true);
                         break;
                     case 0xdf:  /* RST 3 */
                         memory.push(registers.pc);
@@ -923,7 +934,8 @@ namespace em80
                         registers.hl = memory.pop();
                         break;
                     case 0xe2:  /* JPO a16 */
-                        if (!flags.p) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (!flags.p) registers.pc = ushortTemp;
                         break;
                     case 0xe3:  /* XTHL */
                         ushortTemp = memory.pop();
@@ -931,10 +943,11 @@ namespace em80
                         registers.hl = ushortTemp;
                         break;
                     case 0xe4:  /* CPO a16 */
+                        ushortTemp = memory.get_16();
                         if (!flags.p)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xe5:  /* PUSH H */
@@ -954,7 +967,8 @@ namespace em80
                         registers.pc = registers.hl;
                         break;
                     case 0xea:  /* JPE a16 */
-                        if (flags.p) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (flags.p) registers.pc = ushortTemp;
                         break;
                     case 0xeb:  /* XCHG */
                         ushortTemp = registers.de;
@@ -962,10 +976,11 @@ namespace em80
                         registers.hl = ushortTemp;
                         break;
                     case 0xec:  /* CPE a16 */
+                        ushortTemp = memory.get_16();
                         if (flags.p)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xee:  /* XRI d8 */
@@ -982,16 +997,18 @@ namespace em80
                         registers.af = memory.pop();
                         break;
                     case 0xf2:  /* JP a16 */
-                        if (!flags.s) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (!flags.s) registers.pc = ushortTemp;
                         break;
                     case 0xf3:  /* DI */
                         flags.i = false;
                         break;
                     case 0xf4:  /* CP a16 */
+                        ushortTemp = memory.get_16();
                         if (!flags.s)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xf5:  /* PUSH PSW */
@@ -1011,16 +1028,18 @@ namespace em80
                         registers.sp = registers.hl;
                         break;
                     case 0xfa:  /* JM a16 */
-                        if (flags.s) registers.pc = memory.get_16();
+                        ushortTemp = memory.get_16();
+                        if (flags.s) registers.pc = ushortTemp;
                         break;
                     case 0xfb:  /* EI */
                         flags.i = true;
                         break;
                     case 0xfc:  /* CM a16 */
+                        ushortTemp = memory.get_16();
                         if (flags.s)
                         {
                             memory.push(registers.pc);
-                            registers.pc = memory.get_16();
+                            registers.pc = ushortTemp;
                         }
                         break;
                     case 0xfe:  /* CPI d8 */
