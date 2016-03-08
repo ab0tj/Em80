@@ -62,8 +62,20 @@
             this.btnRunStop = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.trackBarCycleDelay = new System.Windows.Forms.TrackBar();
+            this.lblCycleDelay = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupRegisters.SuspendLayout();
             this.groupMemory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupRegisters
@@ -96,7 +108,7 @@
             this.groupRegisters.Controls.Add(this.label2);
             this.groupRegisters.Controls.Add(this.txtRegA);
             this.groupRegisters.Controls.Add(this.label1);
-            this.groupRegisters.Location = new System.Drawing.Point(667, 12);
+            this.groupRegisters.Location = new System.Drawing.Point(667, 27);
             this.groupRegisters.Name = "groupRegisters";
             this.groupRegisters.Size = new System.Drawing.Size(149, 223);
             this.groupRegisters.TabIndex = 0;
@@ -352,9 +364,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupMemory.Controls.Add(this.hexMemory);
-            this.groupMemory.Location = new System.Drawing.Point(12, 12);
+            this.groupMemory.Location = new System.Drawing.Point(12, 27);
             this.groupMemory.Name = "groupMemory";
-            this.groupMemory.Size = new System.Drawing.Size(649, 326);
+            this.groupMemory.Size = new System.Drawing.Size(649, 336);
             this.groupMemory.TabIndex = 1;
             this.groupMemory.TabStop = false;
             this.groupMemory.Text = "Memory";
@@ -370,7 +382,7 @@
             this.hexMemory.Location = new System.Drawing.Point(6, 19);
             this.hexMemory.Name = "hexMemory";
             this.hexMemory.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexMemory.Size = new System.Drawing.Size(637, 301);
+            this.hexMemory.Size = new System.Drawing.Size(637, 311);
             this.hexMemory.StringViewVisible = true;
             this.hexMemory.TabIndex = 0;
             this.hexMemory.UseFixedBytesPerLine = true;
@@ -379,7 +391,7 @@
             // btnStep
             // 
             this.btnStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStep.Location = new System.Drawing.Point(667, 251);
+            this.btnStep.Location = new System.Drawing.Point(667, 307);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
             this.btnStep.TabIndex = 2;
@@ -390,7 +402,7 @@
             // btnRunStop
             // 
             this.btnRunStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRunStop.Location = new System.Drawing.Point(744, 251);
+            this.btnRunStop.Location = new System.Drawing.Point(744, 307);
             this.btnRunStop.Name = "btnRunStop";
             this.btnRunStop.Size = new System.Drawing.Size(75, 23);
             this.btnRunStop.TabIndex = 3;
@@ -401,7 +413,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(667, 280);
+            this.btnReset.Location = new System.Drawing.Point(667, 336);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 4;
@@ -412,7 +424,7 @@
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(744, 280);
+            this.btnClear.Location = new System.Drawing.Point(744, 336);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 5;
@@ -420,24 +432,116 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // trackBarCycleDelay
+            // 
+            this.trackBarCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarCycleDelay.Location = new System.Drawing.Point(672, 256);
+            this.trackBarCycleDelay.Maximum = 1000;
+            this.trackBarCycleDelay.Name = "trackBarCycleDelay";
+            this.trackBarCycleDelay.Size = new System.Drawing.Size(144, 45);
+            this.trackBarCycleDelay.TabIndex = 8;
+            this.trackBarCycleDelay.TickFrequency = 100;
+            this.trackBarCycleDelay.Scroll += new System.EventHandler(this.trackBarCycleDelay_Scroll);
+            // 
+            // lblCycleDelay
+            // 
+            this.lblCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCycleDelay.AutoSize = true;
+            this.lblCycleDelay.Location = new System.Drawing.Point(701, 288);
+            this.lblCycleDelay.Name = "lblCycleDelay";
+            this.lblCycleDelay.Size = new System.Drawing.Size(88, 13);
+            this.lblCycleDelay.TabIndex = 9;
+            this.lblCycleDelay.Text = "Cycle Delay: 0ms";
+            this.lblCycleDelay.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.consoleToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(828, 24);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Text = "&Load...";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // consoleToolStripMenuItem
+            // 
+            this.consoleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
+            this.clearToolStripMenuItem});
+            this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+            this.consoleToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.consoleToolStripMenuItem.Text = "&Console";
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Text = "&Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Text = "&Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 350);
+            this.ClientSize = new System.Drawing.Size(828, 375);
+            this.Controls.Add(this.lblCycleDelay);
+            this.Controls.Add(this.trackBarCycleDelay);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnRunStop);
             this.Controls.Add(this.btnStep);
             this.Controls.Add(this.groupMemory);
             this.Controls.Add(this.groupRegisters);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmDebug";
             this.Text = "em80";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDebug_FormClosed);
             this.Load += new System.EventHandler(this.frmPanel_Load);
             this.groupRegisters.ResumeLayout(false);
             this.groupRegisters.PerformLayout();
             this.groupMemory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -477,6 +581,16 @@
         private Be.Windows.Forms.HexBox hexMemory;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TrackBar trackBarCycleDelay;
+        private System.Windows.Forms.Label lblCycleDelay;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

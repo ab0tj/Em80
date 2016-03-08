@@ -49,12 +49,14 @@ namespace em80
 
         private void resetSystem()
         {
+            emulatedSystem.cpu.running = false;
             emulatedSystem.cpu.reset();
             updateRegisterDisplay();
         }
 
         private void frmPanel_Load(object sender, EventArgs e)
         {
+            
             resetSystem();
             emulatedSystem.memory.init();
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
@@ -69,6 +71,11 @@ namespace em80
                 return;
             }
 
+            Step();
+        }
+
+        private void Step()
+        {
             if (provMem.HasChanges())
             {
                 emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
@@ -108,8 +115,17 @@ namespace em80
 
             while (emulatedSystem.cpu.running)
             {
-                emulatedSystem.cpu.cycle();
-                Application.DoEvents();
+                if (trackBarCycleDelay.Value == 0)
+                {
+                    emulatedSystem.cpu.cycle();
+                    Application.DoEvents();
+                }
+                else
+                {
+                    Step();
+                    System.Threading.Thread.Sleep(trackBarCycleDelay.Value);
+                    Application.DoEvents();
+                }
             }
 
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
@@ -118,6 +134,42 @@ namespace em80
 
             btnRunStop.Enabled = true;
             btnStep.Text = "&Step";
+        }
+
+        private void trackBarCycleDelay_Scroll(object sender, EventArgs e)
+        {
+            lblCycleDelay.Text = "Cycle Delay: " + trackBarCycleDelay.Value.ToString() + "ms";
+        }
+
+        private void frmDebug_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            emulatedSystem.io.formConsole.Show();
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            emulatedSystem.io.formConsole.ClearConsole();
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            byte[] bytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
+            bytes.CopyTo(emulatedSystem.memory.bytes, 0);
+
+            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+            hexMemory.ByteProvider = provMem;
+            updateRegisterDisplay();
         }
     }
 }

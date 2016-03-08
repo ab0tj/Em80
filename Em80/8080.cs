@@ -4,6 +4,66 @@ namespace em80
 {
     public static class emulatedSystem
     {
+        public static class io
+        {
+            public static Em80.frmConsole formConsole = new Em80.frmConsole();
+
+            public class Keyboard
+            {
+                private static byte[] buff = new byte[32];
+                private static int head;
+                private static int tail;
+                public static bool byte_aval
+                {
+                    get { return head != tail; }
+                }
+                public static void KeyPress(byte val)
+                {
+                    int next = (head + 1) % 32;
+                    if (next != tail)
+                    {
+                        buff[head] = val;
+                        head = next;
+                    }
+                }
+
+                public static byte GetKey()
+                {
+                    if (!byte_aval) return 0;
+
+                    byte val = buff[tail];
+                    tail = (tail + 1) % 32;
+                    return val;
+                }
+            }
+
+
+
+            public static void o(byte port)
+            {
+                if (port == 2)
+                {
+                    formConsole.WriteToConsole(cpu.registers.a);
+                }
+            }
+
+            public static void i(byte port)
+            {
+                switch (port)
+                {
+                    case 2:
+                        cpu.registers.a = Keyboard.GetKey();
+                        break;
+                    case 3:
+                        cpu.registers.a = 0x01;
+                        if (Keyboard.byte_aval) cpu.registers.a |= 0x02;
+                        break;
+                    default:
+                        cpu.registers.a = 0;
+                        break;
+                }
+            }
+        }
         public static class memory
         {
             public static byte[] bytes;
@@ -201,20 +261,6 @@ namespace em80
                     flags.z = (registers.a == 0);
                     flags.p = flags.parityBits[registers.a];
                     flags.c = false;
-                }
-            }
-
-            public static class io
-            {
-                // TODO: I/O functions
-                public static void o(byte port)
-                {
-
-                }
-
-                public static void i(byte port)
-                {
-                    registers.a = 0;
                 }
             }
 
