@@ -44,7 +44,11 @@ namespace em80
 
         private void updateMemoryFromHex()
         {
-            emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+            if (provMem.HasChanges())
+            {
+                emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+                provMem.ApplyChanges();
+            }
         }
 
         private void resetSystem()
@@ -54,13 +58,13 @@ namespace em80
             updateRegisterDisplay();
         }
 
-        private void frmPanel_Load(object sender, EventArgs e)
+        private void frmDebug_Load(object sender, EventArgs e)
         {
-            
             resetSystem();
             emulatedSystem.memory.init();
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
+            hexMemory.Select();
         }
 
         private void btnStep_Click(object sender, EventArgs e)
@@ -71,17 +75,14 @@ namespace em80
                 return;
             }
 
+            updateMemoryFromHex();
+            updateRegistersFromTextBoxes();
+
             Step();
         }
 
         private void Step()
         {
-            if (provMem.HasChanges())
-            {
-                emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
-                provMem.ApplyChanges();
-            }
-
             emulatedSystem.cpu.cycle();
 
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
@@ -109,7 +110,21 @@ namespace em80
                 provMem.ApplyChanges();
             }
 
+            updateMemoryFromHex();
+            updateRegistersFromTextBoxes();
+
             emulatedSystem.cpu.running = true;
+            txtRegA.ReadOnly = true;
+            txtRegB.ReadOnly = true;
+            txtRegC.ReadOnly = true;
+            txtRegD.ReadOnly = true;
+            txtRegE.ReadOnly = true;
+            txtRegF.ReadOnly = true;
+            txtRegH.ReadOnly = true;
+            txtRegL.ReadOnly = true;
+            txtRegPC.ReadOnly = true;
+            txtRegSP.ReadOnly = true;
+            hexMemory.ReadOnly = true;
             btnRunStop.Enabled = false;
             btnStep.Text = "&Stop";
 
@@ -128,22 +143,34 @@ namespace em80
                 }
             }
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
-            hexMemory.ByteProvider = provMem;
-            updateRegisterDisplay();
+            try {
+                provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+                hexMemory.ByteProvider = provMem;
+                updateRegisterDisplay();
 
-            btnRunStop.Enabled = true;
-            btnStep.Text = "&Step";
+                txtRegA.ReadOnly = false;
+                txtRegB.ReadOnly = false;
+                txtRegC.ReadOnly = false;
+                txtRegD.ReadOnly = false;
+                txtRegE.ReadOnly = false;
+                txtRegF.ReadOnly = false;
+                txtRegH.ReadOnly = false;
+                txtRegL.ReadOnly = false;
+                txtRegPC.ReadOnly = false;
+                txtRegSP.ReadOnly = false;
+                hexMemory.ReadOnly = false;
+                btnRunStop.Enabled = true;
+                btnStep.Text = "&Step";
+            }
+            catch (ObjectDisposedException)
+            {
+                Application.Exit();
+            }
         }
 
         private void trackBarCycleDelay_Scroll(object sender, EventArgs e)
         {
             lblCycleDelay.Text = "Cycle Delay: " + trackBarCycleDelay.Value.ToString() + "ms";
-        }
-
-        private void frmDebug_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,6 +196,43 @@ namespace em80
 
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
+            updateRegisterDisplay();
+        }
+
+        private void frmDebug_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            emulatedSystem.cpu.running = false;
+        }
+
+        private void ValidateHexInput(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar > 47 && e.KeyChar < 58) || (e.KeyChar > 64 && e.KeyChar < 71))   // 0-9, A-F
+            {
+                return;
+            }
+            else if (e.KeyChar > 96 && e.KeyChar < 103) // a-f
+            {
+                e.KeyChar -= (char)32;
+                return;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void updateRegistersFromTextBoxes()
+        {
+            emulatedSystem.cpu.registers.a = Convert.ToByte(txtRegA.Text, 16);
+            emulatedSystem.cpu.registers.b = Convert.ToByte(txtRegB.Text, 16);
+            emulatedSystem.cpu.registers.c = Convert.ToByte(txtRegC.Text, 16);
+            emulatedSystem.cpu.registers.d = Convert.ToByte(txtRegD.Text, 16);
+            emulatedSystem.cpu.registers.e = Convert.ToByte(txtRegE.Text, 16);
+            emulatedSystem.cpu.registers.f = Convert.ToByte(txtRegF.Text, 16);
+            emulatedSystem.cpu.registers.h = Convert.ToByte(txtRegH.Text, 16);
+            emulatedSystem.cpu.registers.l = Convert.ToByte(txtRegL.Text, 16);
+            emulatedSystem.cpu.registers.pc = Convert.ToUInt16(txtRegPC.Text, 16);
+            emulatedSystem.cpu.registers.sp = Convert.ToUInt16(txtRegSP.Text, 16);
             updateRegisterDisplay();
         }
     }

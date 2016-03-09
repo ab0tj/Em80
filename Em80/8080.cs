@@ -8,7 +8,7 @@ namespace em80
         {
             public static Em80.frmConsole formConsole = new Em80.frmConsole();
 
-            public class Keyboard
+            public static class Keyboard
             {
                 private static byte[] buff = new byte[32];
                 private static int head;
@@ -84,15 +84,15 @@ namespace em80
             public static ushort pop()
             {
                 ushort val;
-                val = memory.bytes[++cpu.registers.sp];
-                val |= (ushort)(memory.bytes[++cpu.registers.sp] << 8);
+                val = memory.bytes[cpu.registers.sp++];
+                val |= (ushort)(memory.bytes[cpu.registers.sp++] << 8);
                 return val;
             }
 
             public static void push(ushort val)
             {
-                memory.bytes[cpu.registers.sp--] = (byte)(val >> 8);
-                memory.bytes[cpu.registers.sp--] = (byte)val;
+                memory.bytes[--cpu.registers.sp] = (byte)(val >> 8);
+                memory.bytes[--cpu.registers.sp] = (byte)val;
             }
         }
 

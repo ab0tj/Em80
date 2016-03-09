@@ -190,11 +190,12 @@
             // txtRegPC
             // 
             this.txtRegPC.Location = new System.Drawing.Point(37, 150);
+            this.txtRegPC.MaxLength = 4;
             this.txtRegPC.Name = "txtRegPC";
-            this.txtRegPC.ReadOnly = true;
             this.txtRegPC.Size = new System.Drawing.Size(92, 20);
-            this.txtRegPC.TabIndex = 18;
+            this.txtRegPC.TabIndex = 10;
             this.txtRegPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegPC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label9
             // 
@@ -208,20 +209,22 @@
             // txtRegSP
             // 
             this.txtRegSP.Location = new System.Drawing.Point(37, 124);
+            this.txtRegSP.MaxLength = 4;
             this.txtRegSP.Name = "txtRegSP";
-            this.txtRegSP.ReadOnly = true;
             this.txtRegSP.Size = new System.Drawing.Size(92, 20);
-            this.txtRegSP.TabIndex = 16;
+            this.txtRegSP.TabIndex = 9;
             this.txtRegSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegSP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // txtRegL
             // 
             this.txtRegL.Location = new System.Drawing.Point(99, 98);
+            this.txtRegL.MaxLength = 2;
             this.txtRegL.Name = "txtRegL";
-            this.txtRegL.ReadOnly = true;
             this.txtRegL.Size = new System.Drawing.Size(30, 20);
-            this.txtRegL.TabIndex = 15;
+            this.txtRegL.TabIndex = 8;
             this.txtRegL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label8
             // 
@@ -235,11 +238,12 @@
             // txtRegH
             // 
             this.txtRegH.Location = new System.Drawing.Point(37, 98);
+            this.txtRegH.MaxLength = 2;
             this.txtRegH.Name = "txtRegH";
-            this.txtRegH.ReadOnly = true;
             this.txtRegH.Size = new System.Drawing.Size(30, 20);
-            this.txtRegH.TabIndex = 13;
+            this.txtRegH.TabIndex = 7;
             this.txtRegH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label7
             // 
@@ -253,11 +257,12 @@
             // txtRegE
             // 
             this.txtRegE.Location = new System.Drawing.Point(99, 72);
+            this.txtRegE.MaxLength = 2;
             this.txtRegE.Name = "txtRegE";
-            this.txtRegE.ReadOnly = true;
             this.txtRegE.Size = new System.Drawing.Size(30, 20);
-            this.txtRegE.TabIndex = 11;
+            this.txtRegE.TabIndex = 6;
             this.txtRegE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label6
             // 
@@ -271,11 +276,12 @@
             // txtRegD
             // 
             this.txtRegD.Location = new System.Drawing.Point(37, 72);
+            this.txtRegD.MaxLength = 2;
             this.txtRegD.Name = "txtRegD";
-            this.txtRegD.ReadOnly = true;
             this.txtRegD.Size = new System.Drawing.Size(30, 20);
-            this.txtRegD.TabIndex = 9;
+            this.txtRegD.TabIndex = 5;
             this.txtRegD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label5
             // 
@@ -289,11 +295,12 @@
             // txtRegF
             // 
             this.txtRegF.Location = new System.Drawing.Point(99, 19);
+            this.txtRegF.MaxLength = 2;
             this.txtRegF.Name = "txtRegF";
-            this.txtRegF.ReadOnly = true;
             this.txtRegF.Size = new System.Drawing.Size(30, 20);
-            this.txtRegF.TabIndex = 7;
+            this.txtRegF.TabIndex = 2;
             this.txtRegF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label4
             // 
@@ -307,11 +314,12 @@
             // txtRegC
             // 
             this.txtRegC.Location = new System.Drawing.Point(99, 45);
+            this.txtRegC.MaxLength = 2;
             this.txtRegC.Name = "txtRegC";
-            this.txtRegC.ReadOnly = true;
             this.txtRegC.Size = new System.Drawing.Size(30, 20);
-            this.txtRegC.TabIndex = 5;
+            this.txtRegC.TabIndex = 4;
             this.txtRegC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label3
             // 
@@ -325,11 +333,12 @@
             // txtRegB
             // 
             this.txtRegB.Location = new System.Drawing.Point(37, 45);
+            this.txtRegB.MaxLength = 2;
             this.txtRegB.Name = "txtRegB";
-            this.txtRegB.ReadOnly = true;
             this.txtRegB.Size = new System.Drawing.Size(30, 20);
             this.txtRegB.TabIndex = 3;
             this.txtRegB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label2
             // 
@@ -343,11 +352,12 @@
             // txtRegA
             // 
             this.txtRegA.Location = new System.Drawing.Point(37, 19);
+            this.txtRegA.MaxLength = 2;
             this.txtRegA.Name = "txtRegA";
-            this.txtRegA.ReadOnly = true;
             this.txtRegA.Size = new System.Drawing.Size(30, 20);
             this.txtRegA.TabIndex = 1;
             this.txtRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRegA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
             // 
             // label1
             // 
@@ -394,7 +404,7 @@
             this.btnStep.Location = new System.Drawing.Point(667, 307);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
-            this.btnStep.TabIndex = 2;
+            this.btnStep.TabIndex = 12;
             this.btnStep.Text = "&Step";
             this.btnStep.UseVisualStyleBackColor = true;
             this.btnStep.Click += new System.EventHandler(this.btnStep_Click);
@@ -405,7 +415,7 @@
             this.btnRunStop.Location = new System.Drawing.Point(744, 307);
             this.btnRunStop.Name = "btnRunStop";
             this.btnRunStop.Size = new System.Drawing.Size(75, 23);
-            this.btnRunStop.TabIndex = 3;
+            this.btnRunStop.TabIndex = 13;
             this.btnRunStop.Text = "&Run";
             this.btnRunStop.UseVisualStyleBackColor = true;
             this.btnRunStop.Click += new System.EventHandler(this.btnRunStop_Click);
@@ -416,7 +426,7 @@
             this.btnReset.Location = new System.Drawing.Point(667, 336);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
-            this.btnReset.TabIndex = 4;
+            this.btnReset.TabIndex = 14;
             this.btnReset.Text = "R&eset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -427,7 +437,7 @@
             this.btnClear.Location = new System.Drawing.Point(744, 336);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 5;
+            this.btnClear.TabIndex = 15;
             this.btnClear.Text = "&Clr Mem";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -439,7 +449,7 @@
             this.trackBarCycleDelay.Maximum = 1000;
             this.trackBarCycleDelay.Name = "trackBarCycleDelay";
             this.trackBarCycleDelay.Size = new System.Drawing.Size(144, 45);
-            this.trackBarCycleDelay.TabIndex = 8;
+            this.trackBarCycleDelay.TabIndex = 11;
             this.trackBarCycleDelay.TickFrequency = 100;
             this.trackBarCycleDelay.Scroll += new System.EventHandler(this.trackBarCycleDelay_Scroll);
             // 
@@ -477,14 +487,14 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.loadToolStripMenuItem.Text = "&Load...";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -500,20 +510,21 @@
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.showToolStripMenuItem.Text = "&Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Binary Files|*.bin";
             // 
             // frmDebug
             // 
@@ -532,8 +543,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmDebug";
             this.Text = "em80";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDebug_FormClosed);
-            this.Load += new System.EventHandler(this.frmPanel_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDebug_FormClosing);
+            this.Load += new System.EventHandler(this.frmDebug_Load);
             this.groupRegisters.ResumeLayout(false);
             this.groupRegisters.PerformLayout();
             this.groupMemory.ResumeLayout(false);

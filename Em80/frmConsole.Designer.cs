@@ -54,6 +54,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "frmConsole";
             this.Text = "Em80 Console";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConsole_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
