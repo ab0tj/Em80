@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 
-namespace em80
+namespace Em80
 {
     public static class emulatedSystem
     {
         public static class io
         {
-            public static Em80.frmConsole formConsole = new Em80.frmConsole();
+            public static frmConsole formConsole = new frmConsole();
 
             public static class Keyboard
             {
@@ -41,7 +41,7 @@ namespace em80
 
             public static void o(byte port)
             {
-                if (port == 2)
+                if (port == 2)  // console data
                 {
                     formConsole.WriteToConsole(cpu.registers.a);
                 }
@@ -51,14 +51,14 @@ namespace em80
             {
                 switch (port)
                 {
-                    case 2:
+                    case 2: // console data
                         cpu.registers.a = Keyboard.GetKey();
                         break;
-                    case 3:
-                        cpu.registers.a = 0x01;
-                        if (Keyboard.byte_aval) cpu.registers.a |= 0x02;
+                    case 3: // console status
+                        cpu.registers.a = 0x01; // tx always ready
+                        if (Keyboard.byte_aval) cpu.registers.a |= 0x02;    // rx ready if a char is waiting
                         break;
-                    default:
+                    default:    // something else
                         cpu.registers.a = 0;
                         break;
                 }

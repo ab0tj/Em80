@@ -19,13 +19,16 @@ namespace Em80
 
         public void WriteToConsole(byte val)
         {
-            //try {
+            if (val == 0x08)
+            {
+                // this was a backspace
+                if (textBox1.Text.Length > 0) textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
+            }
+            else
+            {
+                // this was something else
                 textBox1.AppendText(char.ToString((char)val));
-            //}
-            //catch (ObjectDisposedException)
-            //{
-            //    Application.ExitThread();
-            //}
+            }
         }
 
         public void ClearConsole()
@@ -35,7 +38,7 @@ namespace Em80
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            em80.emulatedSystem.io.Keyboard.KeyPress((byte)e.KeyChar);
+            emulatedSystem.io.Keyboard.KeyPress((byte)e.KeyChar);
         }
 
         private void frmConsole_FormClosing(object sender, FormClosingEventArgs e)

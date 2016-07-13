@@ -50,11 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="8080.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Assembly.cs" />
+    <Compile Include="frmDebug.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmDebug.Designer.cs">
+      <DependentUpon>frmDebug.cs</DependentUpon>
     </Compile>
     <Compile Include="frmConsole.cs">
       <SubType>Form</SubType>
@@ -62,13 +63,23 @@
     <Compile Include="frmConsole.Designer.cs">
       <DependentUpon>frmConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHexOrBin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHexOrBin.Designer.cs">
+      <DependentUpon>frmHexOrBin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmDebug.resx">
+      <DependentUpon>frmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsole.resx">
       <DependentUpon>frmConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHexOrBin.resx">
+      <DependentUpon>frmHexOrBin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

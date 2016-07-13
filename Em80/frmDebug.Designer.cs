@@ -1,4 +1,4 @@
-﻿namespace em80
+﻿namespace Em80
 {
     partial class frmDebug
     {
@@ -523,8 +523,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Binary Files|*.bin";
+            this.openFileDialog1.Filter = "Memory Image (*.hex, *.bin)|*.hex;*.bin|All Files|*.*";
             // 
             // frmDebug
             // 

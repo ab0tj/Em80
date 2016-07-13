@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
-namespace em80
+namespace Em80
 {
     public partial class frmDebug : Form
     {
@@ -190,13 +191,38 @@ namespace em80
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
-            byte[] bytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
-            bytes.CopyTo(emulatedSystem.memory.bytes, 0);
+            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                using (frmHexOrBin f = new frmHexOrBin(openFileDialog1.FileName))
+                {
+                    if (f.ShowDialog() == DialogResult.OK)
+                    {
+                        if (f.checkClear.Checked) emulatedSystem.memory.init();
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
-            hexMemory.ByteProvider = provMem;
-            updateRegisterDisplay();
+                        if (f.radioBin.Checked)
+                        {
+                            try
+                            {
+                                byte[] bytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
+                                bytes.CopyTo(emulatedSystem.memory.bytes, Convert.ToInt32(f.textOffset.Text, 16));
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else if (f.radioHex.Checked)
+                        {
+                            Hex.LoadIntoMem(openFileDialog1.FileName);
+                        }
+                    }
+
+                    provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+                    hexMemory.ByteProvider = provMem;
+                    updateRegisterDisplay();
+
+                }
+            }
         }
 
         private void frmDebug_FormClosing(object sender, FormClosingEventArgs e)
