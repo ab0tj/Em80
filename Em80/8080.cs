@@ -41,7 +41,7 @@ namespace Em80
 
             public static void o(byte port)
             {
-                if (port == 2)  // console data
+                if (port == 2 || port == 17)  // console data
                 {
                     formConsole.WriteToConsole(cpu.registers.a);
                 }
@@ -51,12 +51,17 @@ namespace Em80
             {
                 switch (port)
                 {
-                    case 2: // console data
+                    case 2:  // console data (imsai sio)
+                    case 17: // console data (altair sio)
                         cpu.registers.a = Keyboard.GetKey();
                         break;
-                    case 3: // console status
+                    case 3: // console status (imsai sio)
                         cpu.registers.a = 0x01; // tx always ready
                         if (Keyboard.byte_aval) cpu.registers.a |= 0x02;    // rx ready if a char is waiting
+                        break;
+                    case 16: // console status (altair sio)
+                        cpu.registers.a = 0x02; // tx always ready
+                        if (Keyboard.byte_aval) cpu.registers.a |= 0x01;    // rx ready if a char is waiting
                         break;
                     default:    // something else
                         cpu.registers.a = 0;
@@ -201,7 +206,7 @@ namespace Em80
                     /* Add two 8 bit values and update flags. Optional update of carry flag */
                     ushort w = (ushort)(x + y);
                     flags.s = (w & 0x80) == 0x80;
-                    flags.z = (w == 0);
+                    flags.z = ((byte)w == 0);
                     flags.a = (((x & 0x0f) + (y & 0x0f)) & 0x10) > 0;
                     flags.p = flags.parityBits[(byte)w];
                     if (carry) flags.c = (w & 0xff00) > 0;
@@ -213,7 +218,7 @@ namespace Em80
                     /* Subtract two 8 bit values and update flags. Optional update of carry flag */
                     short w = (short)(x - y);
                     flags.s = (w & 0x80) == 0x80;
-                    flags.z = (w == 0);
+                    flags.z = ((byte)w == 0);
                     flags.a = (((x & 0x0f) - (y & 0x0f)) & 0x10) > 0;
                     flags.p = flags.parityBits[(byte)w];
                     if (carry) flags.c = (w & 0xff00) > 0;

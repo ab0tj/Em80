@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDebug));
             this.groupRegisters = new System.Windows.Forms.GroupBox();
             this.lblFlagC = new System.Windows.Forms.Label();
             this.lblFlagP = new System.Windows.Forms.Label();
@@ -539,6 +540,7 @@
             this.Controls.Add(this.groupMemory);
             this.Controls.Add(this.groupRegisters);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmDebug";
             this.Text = "em80";

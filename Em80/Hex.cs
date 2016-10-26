@@ -20,7 +20,16 @@ namespace Em80
 
                     while (type != 1)   // loop through hex file
                     {
-                        while (sr.Read() != ':');   // look for start code
+                        while (true)                    // look for start code
+                        {
+                            int a = sr.Read();
+                            if (a == ':') break;
+                            if (a == -1)
+                            {
+                                MessageBox.Show("Unexpected end of file", "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
 
                         byte count = GetNextByte(sr);    // byte count
                         byte cksum = count;
@@ -51,9 +60,7 @@ namespace Em80
                             return;
                         }
 
-                        ushort addr = (ushort)((addrHi << 8) + addrLo);
-
-                        buff.CopyTo(emulatedSystem.memory.bytes, addr);
+                        buff.CopyTo(emulatedSystem.memory.bytes, (addrHi << 8) + addrLo);
                     }
                 }
             }
