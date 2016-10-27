@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Em80
 {
-    class Assembly
+    static class Assembly
     {
-        string[] opCode = new string[]
+        public static string[] mnemonics = new string[]
         {
             "NOP",      "LXI B,",   "STAX B",   "INX B",    "INR B",    "DCR B",    "MVI B,",   "RLC",
             "NOP",      "DAD B",    "LDAX B",   "DCX B",    "INR C",    "DCR C",    "MVI C,",   "RRC",
@@ -44,7 +44,7 @@ namespace Em80
             "RM",       "SPHL",     "JM ",      "EI",       "CM ",      "CALL ",    "CPI ",     "RST 7"
         };
 
-        byte[] instructionLength = new byte[]
+        public static byte[] instructionLengths = new byte[]
         {
             1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1,
             1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1,
@@ -63,5 +63,32 @@ namespace Em80
             1, 1, 3, 1, 3, 1, 2, 1, 1, 1, 3, 1, 3, 3, 2, 1,
             1, 1, 3, 1, 3, 1, 2, 1, 1, 1, 3, 1, 3, 3, 2, 1
         };
+
+        public static byte currentInstructionLength
+        {
+            get { return instructionLengths[emulatedSystem.memory.bytes[emulatedSystem.cpu.registers.pc]]; }
+        }
+
+        public static string disassembleCurrentInstruction()
+        {
+            ushort pc = emulatedSystem.cpu.registers.pc;
+            byte opCode = emulatedSystem.memory.bytes[pc];
+            string x = mnemonics[opCode];
+
+            if (instructionLengths[opCode] == 2)    // 8 bit immediate
+            {
+                x += emulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += "h";
+            }
+
+            if (instructionLengths[opCode] == 3)    // 16 bit immediate
+            {
+                x += emulatedSystem.memory.bytes[pc + 2].ToString("X2");
+                x += emulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += "h";
+            }
+
+            return x;
+        }
     }
 }

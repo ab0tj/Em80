@@ -10,14 +10,14 @@ namespace Em80
 
             public static class Keyboard
             {
-                private static byte[] buff = new byte[32];
+                private static byte[] buff = new byte[32];  // implement a 32-byte circular buffer
                 private static int head;
                 private static int tail;
                 public static bool byte_aval
                 {
                     get { return head != tail; }
                 }
-                public static void KeyPress(byte val)
+                public static void KeyPress(byte val)   // add key to the buffer
                 {
                     int next = (head + 1) % 32;
                     if (next != tail)
@@ -27,7 +27,7 @@ namespace Em80
                     }
                 }
 
-                public static byte GetKey()
+                public static byte GetKey()     // get key from the buffer
                 {
                     if (!byte_aval) return 0;
 
@@ -39,7 +39,7 @@ namespace Em80
 
 
 
-            public static void o(byte port)
+            public static void o(byte port)    // output to "port"
             {
                 if (port == 2 || port == 17)  // console data
                 {
@@ -47,7 +47,7 @@ namespace Em80
                 }
             }
 
-            public static void i(byte port)
+            public static void i(byte port)     // input from "port"
             {
                 switch (port)
                 {
@@ -71,7 +71,7 @@ namespace Em80
         }
         public static class memory
         {
-            public static byte[] bytes;
+            public static byte[] bytes = new byte[65536];
 
             public static void init()
             {
@@ -142,7 +142,7 @@ namespace Em80
 
             public static class flags
             {
-                public static bool[] parityBits = new bool[256]
+                public static readonly bool[] parityBits = new bool[256]     // keep a table of possible parity values instead of calculating it
                 {
                     true, false, false, true, false, true, true, false, false, true, true, false, true, false, false, true,
                     false, true, true, false, true, false, false, true, true, false, false, true, false, true, true, false,
@@ -243,6 +243,7 @@ namespace Em80
 
                 public static void ana(byte x)
                 {
+                    /* and A register with x, update flags */
                     registers.a &= x;
                     flags.s = (registers.a & 0x80) == 0x80;
                     flags.z = (registers.a == 0);
@@ -252,6 +253,7 @@ namespace Em80
 
                 public static void xra(byte x)
                 {
+                    /* xor A register with x, update flags */
                     registers.a ^= x;
                     flags.s = (registers.a & 0x80) == 0x80;
                     flags.z = (registers.a == 0);
@@ -261,6 +263,7 @@ namespace Em80
 
                 public static void ora(byte x)
                 {
+                    /* or A register with x, update flags */
                     registers.a |= x;
                     flags.s = (registers.a & 0x80) == 0x80;
                     flags.z = (registers.a == 0);
@@ -271,6 +274,7 @@ namespace Em80
 
             public static void reset()
             {
+                /* Reset CPU state */
                 registers.pc = 0;
                 registers.sp = 0;
                 registers.a = 0;
@@ -283,8 +287,9 @@ namespace Em80
                 registers.l = 0;
             }
 
-            public static void cycle()
+            public static void exec()
             {
+                /* Execute one machine instruction */
                 bool boolTemp;
                 ushort ushortTemp;
 

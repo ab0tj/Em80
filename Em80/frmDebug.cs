@@ -38,7 +38,9 @@ namespace Em80
             lblFlagS.Enabled = emulatedSystem.cpu.flags.s;
             lblFlagZ.Enabled = emulatedSystem.cpu.flags.z;
 
-            hexMemory.Select(emulatedSystem.cpu.registers.pc,1);
+            hexMemory.Select(emulatedSystem.cpu.registers.pc, Assembly.currentInstructionLength);
+
+            lblInstruction.Text = Assembly.disassembleCurrentInstruction();
         }
 
         Be.Windows.Forms.DynamicByteProvider provMem;
@@ -84,7 +86,7 @@ namespace Em80
 
         private void Step()
         {
-            emulatedSystem.cpu.cycle();
+            emulatedSystem.cpu.exec();
 
             provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
@@ -128,12 +130,13 @@ namespace Em80
             hexMemory.ReadOnly = true;
             btnRunStop.Enabled = false;
             btnStep.Text = "&Stop";
+            lblInstruction.Text = "(running)";
 
             while (emulatedSystem.cpu.running)
             {
                 if (trackBarCycleDelay.Value == 0)
                 {
-                    emulatedSystem.cpu.cycle();
+                    emulatedSystem.cpu.exec();
                     Application.DoEvents();
                 }
                 else

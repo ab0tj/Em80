@@ -73,10 +73,13 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblInstruction = new System.Windows.Forms.Label();
             this.groupRegisters.SuspendLayout();
             this.groupMemory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupRegisters
@@ -377,7 +380,7 @@
             this.groupMemory.Controls.Add(this.hexMemory);
             this.groupMemory.Location = new System.Drawing.Point(12, 27);
             this.groupMemory.Name = "groupMemory";
-            this.groupMemory.Size = new System.Drawing.Size(649, 336);
+            this.groupMemory.Size = new System.Drawing.Size(649, 373);
             this.groupMemory.TabIndex = 1;
             this.groupMemory.TabStop = false;
             this.groupMemory.Text = "Memory";
@@ -393,7 +396,7 @@
             this.hexMemory.Location = new System.Drawing.Point(6, 19);
             this.hexMemory.Name = "hexMemory";
             this.hexMemory.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexMemory.Size = new System.Drawing.Size(637, 311);
+            this.hexMemory.Size = new System.Drawing.Size(637, 348);
             this.hexMemory.StringViewVisible = true;
             this.hexMemory.TabIndex = 0;
             this.hexMemory.UseFixedBytesPerLine = true;
@@ -402,7 +405,7 @@
             // btnStep
             // 
             this.btnStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStep.Location = new System.Drawing.Point(667, 307);
+            this.btnStep.Location = new System.Drawing.Point(667, 348);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
             this.btnStep.TabIndex = 12;
@@ -413,7 +416,7 @@
             // btnRunStop
             // 
             this.btnRunStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRunStop.Location = new System.Drawing.Point(744, 307);
+            this.btnRunStop.Location = new System.Drawing.Point(744, 348);
             this.btnRunStop.Name = "btnRunStop";
             this.btnRunStop.Size = new System.Drawing.Size(75, 23);
             this.btnRunStop.TabIndex = 13;
@@ -424,7 +427,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(667, 336);
+            this.btnReset.Location = new System.Drawing.Point(667, 377);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 14;
@@ -435,7 +438,7 @@
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(744, 336);
+            this.btnClear.Location = new System.Drawing.Point(744, 377);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 15;
@@ -446,7 +449,7 @@
             // trackBarCycleDelay
             // 
             this.trackBarCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarCycleDelay.Location = new System.Drawing.Point(672, 256);
+            this.trackBarCycleDelay.Location = new System.Drawing.Point(672, 297);
             this.trackBarCycleDelay.Maximum = 1000;
             this.trackBarCycleDelay.Name = "trackBarCycleDelay";
             this.trackBarCycleDelay.Size = new System.Drawing.Size(144, 45);
@@ -458,7 +461,7 @@
             // 
             this.lblCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCycleDelay.AutoSize = true;
-            this.lblCycleDelay.Location = new System.Drawing.Point(701, 288);
+            this.lblCycleDelay.Location = new System.Drawing.Point(701, 329);
             this.lblCycleDelay.Name = "lblCycleDelay";
             this.lblCycleDelay.Size = new System.Drawing.Size(88, 13);
             this.lblCycleDelay.TabIndex = 9;
@@ -526,11 +529,32 @@
             // 
             this.openFileDialog1.Filter = "Memory Image (*.hex, *.bin)|*.hex;*.bin|All Files|*.*";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblInstruction);
+            this.groupBox1.Location = new System.Drawing.Point(667, 256);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(149, 35);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Current Instruction";
+            // 
+            // lblInstruction
+            // 
+            this.lblInstruction.AutoSize = true;
+            this.lblInstruction.Location = new System.Drawing.Point(6, 16);
+            this.lblInstruction.Name = "lblInstruction";
+            this.lblInstruction.Size = new System.Drawing.Size(30, 13);
+            this.lblInstruction.TabIndex = 0;
+            this.lblInstruction.Text = "NOP";
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 375);
+            this.ClientSize = new System.Drawing.Size(828, 412);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblCycleDelay);
             this.Controls.Add(this.trackBarCycleDelay);
             this.Controls.Add(this.btnClear);
@@ -552,6 +576,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -603,6 +629,8 @@
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblInstruction;
     }
 }
 
