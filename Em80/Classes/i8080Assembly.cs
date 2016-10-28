@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Em80
 {
-    static class Assembly
+    static class i8080Assembly
     {
         public static string[] mnemonics = new string[]
         {
@@ -66,25 +66,25 @@ namespace Em80
 
         public static byte currentInstructionLength
         {
-            get { return instructionLengths[emulatedSystem.memory.bytes[emulatedSystem.cpu.registers.pc]]; }
+            get { return instructionLengths[EmulatedSystem.memory.bytes[EmulatedSystem.cpu.registers.pc]]; }
         }
 
         public static string disassembleCurrentInstruction()
         {
-            ushort pc = emulatedSystem.cpu.registers.pc;
-            byte opCode = emulatedSystem.memory.bytes[pc];
+            ushort pc = EmulatedSystem.cpu.registers.pc;
+            byte opCode = EmulatedSystem.memory.bytes[pc];
             string x = mnemonics[opCode];
 
             if (instructionLengths[opCode] == 2)    // 8 bit immediate
             {
-                x += emulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += EmulatedSystem.memory.bytes[pc + 1].ToString("X2");
                 x += "h";
             }
 
             if (instructionLengths[opCode] == 3)    // 16 bit immediate
             {
-                x += emulatedSystem.memory.bytes[pc + 2].ToString("X2");
-                x += emulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += EmulatedSystem.memory.bytes[pc + 2].ToString("X2");
+                x += EmulatedSystem.memory.bytes[pc + 1].ToString("X2");
                 x += "h";
             }
 

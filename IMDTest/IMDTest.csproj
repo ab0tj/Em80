@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BAE4E5A-E3B5-4429-BA25-25912342F610}</ProjectGuid>
+    <ProjectGuid>{A14F7200-9464-43AC-87CA-FBA1AFB5AA0B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Em80</RootNamespace>
-    <AssemblyName>Em80</AssemblyName>
+    <AssemblyName>IMDTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,13 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Be.Windows.Forms.HexBox">
-      <HintPath>.\Be.Windows.Forms.HexBox.dll</HintPath>
+      <HintPath>..\Em80\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,41 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DiskJockey.cs" />
-    <Compile Include="Classes\i8080.cs" />
-    <Compile Include="Classes\IO.cs" />
-    <Compile Include="Classes\i8080Assembly.cs" />
-    <Compile Include="Classes\Memory.cs" />
-    <Compile Include="frmDebug.cs">
+    <Compile Include="..\Em80\SupportClasses\ImageDisk.cs">
+      <Link>ImageDisk.cs</Link>
+    </Compile>
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDebug.Designer.cs">
-      <DependentUpon>frmDebug.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmConsole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmConsole.Designer.cs">
-      <DependentUpon>frmConsole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmHexOrBin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmHexOrBin.Designer.cs">
-      <DependentUpon>frmHexOrBin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Hex.cs" />
-    <Compile Include="Classes\ImageDisk.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmDebug.resx">
-      <DependentUpon>frmDebug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmConsole.resx">
-      <DependentUpon>frmConsole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmHexOrBin.resx">
-      <DependentUpon>frmHexOrBin.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -97,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

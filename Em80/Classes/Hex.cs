@@ -60,7 +60,7 @@ namespace Em80
                             return;
                         }
 
-                        buff.CopyTo(emulatedSystem.memory.bytes, (addrHi << 8) + addrLo);
+                        buff.CopyTo(EmulatedSystem.memory.bytes, (addrHi << 8) + addrLo);
                     }
                 }
             }

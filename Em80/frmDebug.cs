@@ -20,27 +20,27 @@ namespace Em80
 
         private void updateRegisterDisplay()
         {
-            txtRegA.Text = emulatedSystem.cpu.registers.a.ToString("X2");
-            txtRegB.Text = emulatedSystem.cpu.registers.b.ToString("X2");
-            txtRegC.Text = emulatedSystem.cpu.registers.c.ToString("X2");
-            txtRegD.Text = emulatedSystem.cpu.registers.d.ToString("X2");
-            txtRegE.Text = emulatedSystem.cpu.registers.e.ToString("X2");
-            txtRegF.Text = emulatedSystem.cpu.registers.f.ToString("X2");
-            txtRegH.Text = emulatedSystem.cpu.registers.h.ToString("X2");
-            txtRegL.Text = emulatedSystem.cpu.registers.l.ToString("X2");
-            txtRegPC.Text = emulatedSystem.cpu.registers.pc.ToString("X4");
-            txtRegSP.Text = emulatedSystem.cpu.registers.sp.ToString("X4");
+            txtRegA.Text = EmulatedSystem.cpu.registers.a.ToString("X2");
+            txtRegB.Text = EmulatedSystem.cpu.registers.b.ToString("X2");
+            txtRegC.Text = EmulatedSystem.cpu.registers.c.ToString("X2");
+            txtRegD.Text = EmulatedSystem.cpu.registers.d.ToString("X2");
+            txtRegE.Text = EmulatedSystem.cpu.registers.e.ToString("X2");
+            txtRegF.Text = EmulatedSystem.cpu.registers.f.ToString("X2");
+            txtRegH.Text = EmulatedSystem.cpu.registers.h.ToString("X2");
+            txtRegL.Text = EmulatedSystem.cpu.registers.l.ToString("X2");
+            txtRegPC.Text = EmulatedSystem.cpu.registers.pc.ToString("X4");
+            txtRegSP.Text = EmulatedSystem.cpu.registers.sp.ToString("X4");
 
-            lblFlagC.Enabled = emulatedSystem.cpu.flags.c;
-            lblFlagA.Enabled = emulatedSystem.cpu.flags.a;
-            lblFlagI.Enabled = emulatedSystem.cpu.flags.i;
-            lblFlagP.Enabled = emulatedSystem.cpu.flags.p;
-            lblFlagS.Enabled = emulatedSystem.cpu.flags.s;
-            lblFlagZ.Enabled = emulatedSystem.cpu.flags.z;
+            lblFlagC.Enabled = EmulatedSystem.cpu.flags.c;
+            lblFlagA.Enabled = EmulatedSystem.cpu.flags.a;
+            lblFlagI.Enabled = EmulatedSystem.cpu.flags.i;
+            lblFlagP.Enabled = EmulatedSystem.cpu.flags.p;
+            lblFlagS.Enabled = EmulatedSystem.cpu.flags.s;
+            lblFlagZ.Enabled = EmulatedSystem.cpu.flags.z;
 
-            hexMemory.Select(emulatedSystem.cpu.registers.pc, Assembly.currentInstructionLength);
+            hexMemory.Select(EmulatedSystem.cpu.registers.pc, i8080Assembly.currentInstructionLength);
 
-            lblInstruction.Text = Assembly.disassembleCurrentInstruction();
+            lblInstruction.Text = i8080Assembly.disassembleCurrentInstruction();
         }
 
         Be.Windows.Forms.DynamicByteProvider provMem;
@@ -49,32 +49,32 @@ namespace Em80
         {
             if (provMem.HasChanges())
             {
-                emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+                EmulatedSystem.memory.bytes = provMem.Bytes.ToArray();
                 provMem.ApplyChanges();
             }
         }
 
         private void resetSystem()
         {
-            emulatedSystem.cpu.running = false;
-            emulatedSystem.cpu.reset();
+            EmulatedSystem.cpu.running = false;
+            EmulatedSystem.cpu.reset();
             updateRegisterDisplay();
         }
 
         private void frmDebug_Load(object sender, EventArgs e)
         {
             resetSystem();
-            emulatedSystem.memory.init();
-            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+            EmulatedSystem.memory.init();
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
             hexMemory.Select();
         }
 
         private void btnStep_Click(object sender, EventArgs e)
         {
-            if (emulatedSystem.cpu.running)
+            if (EmulatedSystem.cpu.running)
             {
-                emulatedSystem.cpu.running = false;
+                EmulatedSystem.cpu.running = false;
                 return;
             }
 
@@ -86,9 +86,9 @@ namespace Em80
 
         private void Step()
         {
-            emulatedSystem.cpu.exec();
+            EmulatedSystem.cpu.exec();
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
             updateRegisterDisplay();
         }
@@ -100,8 +100,8 @@ namespace Em80
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            emulatedSystem.memory.init();
-            provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+            EmulatedSystem.memory.init();
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
             hexMemory.ByteProvider = provMem;
         }
 
@@ -109,14 +109,14 @@ namespace Em80
         {
             if (provMem.HasChanges())
             {
-                emulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+                EmulatedSystem.memory.bytes = provMem.Bytes.ToArray();
                 provMem.ApplyChanges();
             }
 
             updateMemoryFromHex();
             updateRegistersFromTextBoxes();
 
-            emulatedSystem.cpu.running = true;
+            EmulatedSystem.cpu.running = true;
             txtRegA.ReadOnly = true;
             txtRegB.ReadOnly = true;
             txtRegC.ReadOnly = true;
@@ -132,11 +132,11 @@ namespace Em80
             btnStep.Text = "&Stop";
             lblInstruction.Text = "(running)";
 
-            while (emulatedSystem.cpu.running)
+            while (EmulatedSystem.cpu.running)
             {
                 if (trackBarCycleDelay.Value == 0)
                 {
-                    emulatedSystem.cpu.exec();
+                    EmulatedSystem.cpu.exec();
                     Application.DoEvents();
                 }
                 else
@@ -148,7 +148,7 @@ namespace Em80
             }
 
             try {
-                provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+                provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
                 hexMemory.ByteProvider = provMem;
                 updateRegisterDisplay();
 
@@ -184,12 +184,12 @@ namespace Em80
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            emulatedSystem.io.formConsole.Show();
+            EmulatedSystem.io.formConsole.Show();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            emulatedSystem.io.formConsole.ClearConsole();
+            EmulatedSystem.io.formConsole.ClearConsole();
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -200,14 +200,14 @@ namespace Em80
                 {
                     if (f.ShowDialog() == DialogResult.OK)
                     {
-                        if (f.checkClear.Checked) emulatedSystem.memory.init();
+                        if (f.checkClear.Checked) EmulatedSystem.memory.init();
 
                         if (f.radioBin.Checked)
                         {
                             try
                             {
                                 byte[] bytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
-                                bytes.CopyTo(emulatedSystem.memory.bytes, Convert.ToInt32(f.textOffset.Text, 16));
+                                bytes.CopyTo(EmulatedSystem.memory.bytes, Convert.ToInt32(f.textOffset.Text, 16));
                             }
                             catch (Exception ex)
                             {
@@ -220,7 +220,7 @@ namespace Em80
                         }
                     }
 
-                    provMem = new Be.Windows.Forms.DynamicByteProvider(emulatedSystem.memory.bytes);
+                    provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
                     hexMemory.ByteProvider = provMem;
                     updateRegisterDisplay();
 
@@ -230,7 +230,7 @@ namespace Em80
 
         private void frmDebug_FormClosing(object sender, FormClosingEventArgs e)
         {
-            emulatedSystem.cpu.running = false;
+            EmulatedSystem.cpu.running = false;
         }
 
         private void ValidateHexInput(object sender, KeyPressEventArgs e)
@@ -252,16 +252,16 @@ namespace Em80
 
         private void updateRegistersFromTextBoxes()
         {
-            emulatedSystem.cpu.registers.a = Convert.ToByte(txtRegA.Text, 16);
-            emulatedSystem.cpu.registers.b = Convert.ToByte(txtRegB.Text, 16);
-            emulatedSystem.cpu.registers.c = Convert.ToByte(txtRegC.Text, 16);
-            emulatedSystem.cpu.registers.d = Convert.ToByte(txtRegD.Text, 16);
-            emulatedSystem.cpu.registers.e = Convert.ToByte(txtRegE.Text, 16);
-            emulatedSystem.cpu.registers.f = Convert.ToByte(txtRegF.Text, 16);
-            emulatedSystem.cpu.registers.h = Convert.ToByte(txtRegH.Text, 16);
-            emulatedSystem.cpu.registers.l = Convert.ToByte(txtRegL.Text, 16);
-            emulatedSystem.cpu.registers.pc = Convert.ToUInt16(txtRegPC.Text, 16);
-            emulatedSystem.cpu.registers.sp = Convert.ToUInt16(txtRegSP.Text, 16);
+            EmulatedSystem.cpu.registers.a = Convert.ToByte(txtRegA.Text, 16);
+            EmulatedSystem.cpu.registers.b = Convert.ToByte(txtRegB.Text, 16);
+            EmulatedSystem.cpu.registers.c = Convert.ToByte(txtRegC.Text, 16);
+            EmulatedSystem.cpu.registers.d = Convert.ToByte(txtRegD.Text, 16);
+            EmulatedSystem.cpu.registers.e = Convert.ToByte(txtRegE.Text, 16);
+            EmulatedSystem.cpu.registers.f = Convert.ToByte(txtRegF.Text, 16);
+            EmulatedSystem.cpu.registers.h = Convert.ToByte(txtRegH.Text, 16);
+            EmulatedSystem.cpu.registers.l = Convert.ToByte(txtRegL.Text, 16);
+            EmulatedSystem.cpu.registers.pc = Convert.ToUInt16(txtRegPC.Text, 16);
+            EmulatedSystem.cpu.registers.sp = Convert.ToUInt16(txtRegSP.Text, 16);
             updateRegisterDisplay();
         }
     }

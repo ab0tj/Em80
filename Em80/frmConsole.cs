@@ -38,7 +38,7 @@ namespace Em80
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            emulatedSystem.io.Keyboard.KeyPress((byte)e.KeyChar);
+            EmulatedSystem.io.Keyboard.KeyPress((byte)e.KeyChar);
         }
 
         private void frmConsole_FormClosing(object sender, FormClosingEventArgs e)
