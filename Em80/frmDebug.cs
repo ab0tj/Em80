@@ -13,6 +13,8 @@ namespace Em80
 {
     public partial class frmDebug : Form
     {
+        frmConsole formConsole = new frmConsole();
+
         public frmDebug()
         {
             InitializeComponent();
@@ -184,12 +186,12 @@ namespace Em80
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EmulatedSystem.io.formConsole.Show();
+            formConsole.Show();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EmulatedSystem.io.formConsole.ClearConsole();
+            formConsole.ClearConsole();
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
