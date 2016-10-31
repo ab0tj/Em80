@@ -66,25 +66,25 @@ namespace Em80
 
         public static byte currentInstructionLength
         {
-            get { return instructionLengths[EmulatedSystem.memory.bytes[EmulatedSystem.cpu.registers.pc]]; }
+            get { return instructionLengths[EmulatedSystem.memory.read(EmulatedSystem.cpu.registers.pc, true)]; }
         }
 
         public static string disassembleCurrentInstruction()
         {
             ushort pc = EmulatedSystem.cpu.registers.pc;
-            byte opCode = EmulatedSystem.memory.bytes[pc];
+            byte opCode = EmulatedSystem.memory.read(pc, true);
             string x = mnemonics[opCode];
 
             if (instructionLengths[opCode] == 2)    // 8 bit immediate
             {
-                x += EmulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += EmulatedSystem.memory.read(pc + 1, true).ToString("X2");
                 x += "h";
             }
 
             if (instructionLengths[opCode] == 3)    // 16 bit immediate
             {
-                x += EmulatedSystem.memory.bytes[pc + 2].ToString("X2");
-                x += EmulatedSystem.memory.bytes[pc + 1].ToString("X2");
+                x += EmulatedSystem.memory.read(pc + 2, true).ToString("X2");
+                x += EmulatedSystem.memory.read(pc + 1, true).ToString("X2");
                 x += "h";
             }
 

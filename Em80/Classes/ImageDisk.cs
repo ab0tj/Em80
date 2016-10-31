@@ -38,8 +38,7 @@ namespace Em80
             imgData[0] = new Track[80];
             imgData[1] = new Track[80];
 
-            BinaryReader imgReader = null;
-            imgReader = new BinaryReader(File.Open(fileName, FileMode.Open));
+            BinaryReader imgReader = new BinaryReader(File.Open(fileName, FileMode.Open));
 
             header = System.Text.Encoding.Default.GetString(imgReader.ReadBytes(28));
 
@@ -70,7 +69,6 @@ namespace Em80
                 imgData[head][cyl].mode = mode;
                 imgData[head][cyl].sectors = secs;
                 imgData[head][cyl].sectorData = new Sector[secs];
-
                 imgData[head][cyl].sectorMap = imgReader.ReadBytes(secs);
 
                 for (int s = 0; s < secs; s++)   // loop through sector data records

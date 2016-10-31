@@ -38,8 +38,8 @@ namespace Em80
 
                 public static byte m
                 {
-                    get { return memory.bytes[hl]; }
-                    set { memory.bytes[hl] = value; }
+                    get { return memory.read(hl); }
+                    set { memory.write(hl, value); }
                 }
             }
 
@@ -196,14 +196,14 @@ namespace Em80
                 bool boolTemp;
                 ushort ushortTemp;
 
-                switch(memory.bytes[registers.pc++])
+                switch(memory.read(registers.pc++))
                 {
                     case 0x01:  /* LXI B,d16 */
-                        registers.c = memory.bytes[registers.pc++];
-                        registers.b = memory.bytes[registers.pc++];
+                        registers.c = memory.read(registers.pc++);
+                        registers.b = memory.read(registers.pc++);
                         break;
                     case 0x02:  /* STAX B */
-                        memory.bytes[registers.bc] = registers.a;
+                        memory.write(registers.bc, registers.a);
                         break;
                     case 0x03:  /* INX B */
                         registers.bc++;
@@ -215,7 +215,7 @@ namespace Em80
                         registers.b = functions.sub_8(registers.b, 1);
                         break;
                     case 0x06:  /* MVI B,d8 */
-                        registers.b = memory.bytes[registers.pc++];
+                        registers.b = memory.read(registers.pc++);
                         break;
                     case 0x07:  /* RLC */
                         flags.c = (registers.a & 0x80) == 0x80;
@@ -227,7 +227,7 @@ namespace Em80
                         registers.hl = functions.add_16(registers.hl, registers.bc);
                         break;
                     case 0x0a:  /* LDAX B */
-                        registers.a = memory.bytes[registers.bc];
+                        registers.a = memory.read(registers.bc);
                         break;
                     case 0x0b:  /* DCX B */
                         registers.bc--;
@@ -239,7 +239,7 @@ namespace Em80
                         registers.c = functions.sub_8(registers.c, 1);
                         break;
                     case 0x0e:  /* MVI C,d8 */
-                        registers.c = memory.bytes[registers.pc++];
+                        registers.c = memory.read(registers.pc++);
                         break;
                     case 0x0f:  /* RRC */
                         flags.c = (registers.a & 0x01) == 0x01;
@@ -248,11 +248,11 @@ namespace Em80
                         break;
                     // 0x11: NOP
                     case 0x11:  /* LXI D,d16 */
-                        registers.e = memory.bytes[registers.pc++];
-                        registers.d = memory.bytes[registers.pc++];
+                        registers.e = memory.read(registers.pc++);
+                        registers.d = memory.read(registers.pc++);
                         break;
                     case 0x12:  /* STAX D */
-                        memory.bytes[registers.de] = registers.a;
+                        memory.write(registers.de, registers.a);
                         break;
                     case 0x13:  /* INX D */
                         registers.de++;
@@ -264,7 +264,7 @@ namespace Em80
                         registers.d = functions.sub_8(registers.d, 1);
                         break;
                     case 0x16:  /* MVI D,d8 */
-                        registers.d = memory.bytes[registers.pc++];
+                        registers.d = memory.read(registers.pc++);
                         break;
                     case 0x17:  /* RAL */
                         boolTemp = flags.c;
@@ -277,7 +277,7 @@ namespace Em80
                         registers.hl = functions.add_16(registers.hl, registers.de);
                         break;
                     case 0x1a:  /* LDAX D */
-                        registers.a = memory.bytes[registers.de];
+                        registers.a = memory.read(registers.de);
                         break;
                     case 0x1b:  /* DCX D */
                         registers.de--;
@@ -289,7 +289,7 @@ namespace Em80
                         registers.e = functions.sub_8(registers.e, 1);
                         break;
                     case 0x1e:  /* MVI E,d8 */
-                        registers.e = memory.bytes[registers.pc++];
+                        registers.e = memory.read(registers.pc++);
                         break;
                     case 0x1f:  /* RAR */
                         boolTemp = flags.c;
@@ -299,13 +299,13 @@ namespace Em80
                         break;
                     // 0x20: NOP
                     case 0x21:  /* LXI H,d16 */
-                        registers.l = memory.bytes[registers.pc++];
-                        registers.h = memory.bytes[registers.pc++];
+                        registers.l = memory.read(registers.pc++);
+                        registers.h = memory.read(registers.pc++);
                         break;
                     case 0x22:  /* SHLD a16 */
                         ushortTemp = memory.get_16();
-                        memory.bytes[ushortTemp++] = registers.l;
-                        memory.bytes[ushortTemp] = registers.h;
+                        memory.write(ushortTemp++, registers.l);
+                        memory.write(ushortTemp, registers.h);
                         break;
                     case 0x23:  /* INX H */
                         registers.hl++;
@@ -317,7 +317,7 @@ namespace Em80
                         registers.h = functions.sub_8(registers.h, 1);
                         break;
                     case 0x26:  /* MVI H,d8 */
-                        registers.h = memory.bytes[registers.pc++];
+                        registers.h = memory.read(registers.pc++);
                         break;
                     case 0x27:  /* DAA */
                         boolTemp = flags.c;
@@ -333,8 +333,8 @@ namespace Em80
                         break;
                     case 0x2a:  /* LHLD a16 */
                         ushortTemp = memory.get_16();
-                        registers.l = memory.bytes[ushortTemp++];
-                        registers.h = memory.bytes[ushortTemp];
+                        registers.l = memory.read(ushortTemp++);
+                        registers.h = memory.read(ushortTemp);
                         break;
                     case 0x2b:  /* DCX H */
                         registers.hl--;
@@ -346,7 +346,7 @@ namespace Em80
                         registers.l = functions.sub_8(registers.l, 1);
                         break;
                     case 0x2e:  /* MVI L,d8 */
-                        registers.l = memory.bytes[registers.pc++];
+                        registers.l = memory.read(registers.pc++);
                         break;
                     case 0x2f:  /* CMA */
                         registers.a = (byte)~registers.a;
@@ -356,7 +356,7 @@ namespace Em80
                         registers.sp = memory.get_16();
                         break;
                     case 0x32:  /* STA a16 */
-                        memory.bytes[memory.get_16()] = registers.a;
+                        memory.write(memory.get_16(), registers.a);
                         break;
                     case 0x33:  /* INX SP */
                         registers.sp++;
@@ -368,7 +368,7 @@ namespace Em80
                         registers.m = functions.sub_8(registers.m, 1);
                         break;
                     case 0x36:  /* MVI M,d8 */
-                        registers.m = memory.bytes[registers.pc++];
+                        registers.m = memory.read(registers.pc++);
                         break;
                     case 0x37:  /* STC */
                         flags.c = true;
@@ -378,7 +378,7 @@ namespace Em80
                         registers.hl = functions.add_16(registers.hl, registers.sp);
                         break;
                     case 0x3a:  /* LDA a16 */
-                        registers.a = memory.bytes[memory.get_16()];
+                        registers.a = memory.read(memory.get_16());
                         break;
                     case 0x3b:  /* DCX SP */
                         registers.sp--;
@@ -390,7 +390,7 @@ namespace Em80
                         registers.a = functions.sub_8(registers.a, 1);
                         break;
                     case 0x3e:  /* MVI A,d8 */
-                        registers.a = memory.bytes[registers.pc++];
+                        registers.a = memory.read(registers.pc++);
                         break;
                     case 0x3f:  /* CMC */
                         flags.c = !flags.c;
@@ -791,7 +791,7 @@ namespace Em80
                         memory.push(registers.bc);
                         break;
                     case 0xc6:  /* ADI d8 */
-                        registers.a = functions.add_8(registers.a, memory.bytes[registers.pc++], true);
+                        registers.a = functions.add_8(registers.a, memory.read(registers.pc++), true);
                         break;
                     case 0xc7:  /* RST 0 */
                         memory.push(registers.pc);
@@ -824,7 +824,7 @@ namespace Em80
                         registers.pc = memory.get_16();
                         break;
                     case 0xce:  /* ACI d8 */
-                        registers.a = functions.add_8(registers.a, (byte)(memory.bytes[registers.pc++] + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.add_8(registers.a, (byte)(memory.read(registers.pc++) + (flags.c ? 1 : 0)), true);
                         break;
                     case 0xcf:  /* RST 1 */
                         memory.push(registers.pc);
@@ -841,7 +841,7 @@ namespace Em80
                         if (!flags.c) registers.pc = ushortTemp;
                         break;
                     case 0xd3:  /* OUT d8 */
-                        io.o(memory.bytes[registers.pc++]);
+                        io.o(memory.read(registers.pc++));
                         break;
                     case 0xd4:  /* CNC a16 */
                         ushortTemp = memory.get_16();
@@ -855,7 +855,7 @@ namespace Em80
                         memory.push(registers.de);
                         break;
                     case 0xd6:  /* SUI d8 */
-                        registers.a = functions.sub_8(registers.a, memory.bytes[registers.pc++], true);
+                        registers.a = functions.sub_8(registers.a, memory.read(registers.pc++), true);
                         break;
                     case 0xd7:  /* RST 2 */
                         memory.push(registers.pc);
@@ -869,7 +869,7 @@ namespace Em80
                         if (flags.c) registers.pc = ushortTemp;
                         break;
                     case 0xdb:  /* IN d8 */
-                        io.i(memory.bytes[registers.pc++]);
+                        io.i(memory.read(registers.pc++));
                         break;
                     case 0xdc:  /* CC a16 */
                         ushortTemp = memory.get_16();
@@ -880,7 +880,7 @@ namespace Em80
                         }
                         break;
                     case 0xde:  /* SBI d8 */
-                        registers.a = functions.sub_8(registers.a, (byte)(memory.bytes[registers.pc++] + (flags.c ? 1 : 0)), true);
+                        registers.a = functions.sub_8(registers.a, (byte)(memory.read(registers.pc++) + (flags.c ? 1 : 0)), true);
                         break;
                     case 0xdf:  /* RST 3 */
                         memory.push(registers.pc);
@@ -913,7 +913,7 @@ namespace Em80
                         memory.push(registers.hl);
                         break;
                     case 0xe6:  /* ANI d8 */
-                        functions.ana(memory.bytes[registers.pc++]);
+                        functions.ana(memory.read(registers.pc++));
                         break;
                     case 0xe7:  /* RST 4 */
                         memory.push(registers.pc);
@@ -943,7 +943,7 @@ namespace Em80
                         }
                         break;
                     case 0xee:  /* XRI d8 */
-                        functions.xra(memory.bytes[registers.pc++]);
+                        functions.xra(memory.read(registers.pc++));
                         break;
                     case 0xef:  /* RST 5 */
                         memory.push(registers.pc);
@@ -974,7 +974,7 @@ namespace Em80
                         memory.push(registers.af);
                         break;
                     case 0xf6:  /* ORI d8 */
-                        functions.ora(memory.bytes[registers.pc++]);
+                        functions.ora(memory.read(registers.pc++));
                         break;
                     case 0xf7:  /* RST 6 */
                         memory.push(registers.pc);
@@ -1002,7 +1002,7 @@ namespace Em80
                         }
                         break;
                     case 0xfe:  /* CPI d8 */
-                        functions.sub_8(registers.a, memory.bytes[registers.pc++], true);
+                        functions.sub_8(registers.a, memory.read(registers.pc++), true);
                         break;
                     case 0xff:  /* RST 7 */
                         memory.push(registers.pc);

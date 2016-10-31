@@ -51,7 +51,7 @@ namespace Em80
         {
             if (provMem.HasChanges())
             {
-                EmulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+                EmulatedSystem.memory.copyIn(0, provMem.Bytes.ToArray());
                 provMem.ApplyChanges();
             }
         }
@@ -66,8 +66,8 @@ namespace Em80
         private void frmDebug_Load(object sender, EventArgs e)
         {
             resetSystem();
-            EmulatedSystem.memory.init();
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
+            EmulatedSystem.memory.clear();
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
             hexMemory.ByteProvider = provMem;
             hexMemory.Select();
         }
@@ -90,7 +90,7 @@ namespace Em80
         {
             EmulatedSystem.cpu.exec();
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
             hexMemory.ByteProvider = provMem;
             updateRegisterDisplay();
         }
@@ -102,8 +102,8 @@ namespace Em80
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            EmulatedSystem.memory.init();
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
+            EmulatedSystem.memory.clear();
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
             hexMemory.ByteProvider = provMem;
         }
 
@@ -111,7 +111,7 @@ namespace Em80
         {
             if (provMem.HasChanges())
             {
-                EmulatedSystem.memory.bytes = provMem.Bytes.ToArray();
+                EmulatedSystem.memory.copyIn(0, provMem.Bytes.ToArray());
                 provMem.ApplyChanges();
             }
 
@@ -150,7 +150,7 @@ namespace Em80
             }
 
             try {
-                provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
+                provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
                 hexMemory.ByteProvider = provMem;
                 updateRegisterDisplay();
 
@@ -202,30 +202,30 @@ namespace Em80
                 {
                     if (f.ShowDialog() == DialogResult.OK)
                     {
-                        if (f.checkClear.Checked) EmulatedSystem.memory.init();
+                        if (f.checkClear.Checked) EmulatedSystem.memory.clear();
 
-                        if (f.radioBin.Checked)
+                        try
                         {
-                            try
+                            if (f.radioBin.Checked)
                             {
+
                                 byte[] bytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
-                                bytes.CopyTo(EmulatedSystem.memory.bytes, Convert.ToInt32(f.textOffset.Text, 16));
+                                EmulatedSystem.memory.copyIn(Convert.ToInt32(f.textOffset.Text, 16), bytes);
                             }
-                            catch (Exception ex)
+                            else if (f.radioHex.Checked)
                             {
-                                MessageBox.Show(ex.Message, "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                Hex.LoadIntoMem(openFileDialog1.FileName, f.checkROM.Checked);
                             }
                         }
-                        else if (f.radioHex.Checked)
+                        catch (Exception ex)
                         {
-                            Hex.LoadIntoMem(openFileDialog1.FileName);
+                            MessageBox.Show(ex.Message, "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
+                        provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
+                        hexMemory.ByteProvider = provMem;
+                        updateRegisterDisplay();
                     }
-
-                    provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.bytes);
-                    hexMemory.ByteProvider = provMem;
-                    updateRegisterDisplay();
-
                 }
             }
         }

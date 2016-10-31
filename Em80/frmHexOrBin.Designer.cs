@@ -35,6 +35,7 @@
             this.checkClear = new System.Windows.Forms.CheckBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.checkROM = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // radioHex
@@ -94,7 +95,7 @@
             // btnLoad
             // 
             this.btnLoad.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnLoad.Location = new System.Drawing.Point(58, 84);
+            this.btnLoad.Location = new System.Drawing.Point(58, 107);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(50, 23);
             this.btnLoad.TabIndex = 5;
@@ -105,12 +106,22 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(114, 84);
+            this.btnCancel.Location = new System.Drawing.Point(114, 107);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(50, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // checkROM
+            // 
+            this.checkROM.AutoSize = true;
+            this.checkROM.Location = new System.Drawing.Point(39, 84);
+            this.checkROM.Name = "checkROM";
+            this.checkROM.Size = new System.Drawing.Size(92, 17);
+            this.checkROM.TabIndex = 7;
+            this.checkROM.Text = "Load as ROM";
+            this.checkROM.UseVisualStyleBackColor = true;
             // 
             // frmHexOrBin
             // 
@@ -118,7 +129,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(222, 117);
+            this.ClientSize = new System.Drawing.Size(222, 143);
+            this.Controls.Add(this.checkROM);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.checkClear);
@@ -130,7 +142,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmHexOrBin";
-            this.Text = "Load Memory Image";
+            this.Text = "Load Into Memory";
             this.Load += new System.EventHandler(this.frmHexOrBin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -145,5 +157,6 @@
         public System.Windows.Forms.RadioButton radioBin;
         public System.Windows.Forms.TextBox textOffset;
         public System.Windows.Forms.CheckBox checkClear;
+        public System.Windows.Forms.CheckBox checkROM;
     }
 }
