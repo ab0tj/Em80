@@ -9,9 +9,9 @@ namespace Em80
 {
     static class Hex
     {
-        public static void LoadIntoMem(string theFileName, bool loadAsRom)
+        public static void LoadIntoMem(Stream theStream, bool loadAsRom)
         {
-            using (StreamReader sr = new StreamReader(theFileName))
+            using (StreamReader sr = new StreamReader(theStream))
             {
                 byte type = 0;
 

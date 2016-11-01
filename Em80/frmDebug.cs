@@ -56,7 +56,7 @@ namespace Em80
             }
         }
 
-        private void resetSystem()
+        private void resetCPU()
         {
             EmulatedSystem.cpu.running = false;
             EmulatedSystem.cpu.reset();
@@ -65,11 +65,14 @@ namespace Em80
 
         private void frmDebug_Load(object sender, EventArgs e)
         {
-            resetSystem();
+            EmulatedSystem.DiskJockey.Init(0xf800);
+            EmulatedSystem.sio.Init();
+            resetCPU();
             EmulatedSystem.memory.clear();
+
             provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
             hexMemory.ByteProvider = provMem;
-            hexMemory.Select();
+            hexMemory.Select();      
         }
 
         private void btnStep_Click(object sender, EventArgs e)
@@ -97,7 +100,7 @@ namespace Em80
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            resetSystem();
+            resetCPU();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -214,7 +217,7 @@ namespace Em80
                             }
                             else if (f.radioHex.Checked)
                             {
-                                Hex.LoadIntoMem(openFileDialog1.FileName, f.checkROM.Checked);
+                                Hex.LoadIntoMem(new FileStream(openFileDialog1.FileName, FileMode.Open), f.checkROM.Checked);
                             }
                         }
                         catch (Exception ex)
@@ -265,6 +268,40 @@ namespace Em80
             EmulatedSystem.cpu.registers.pc = Convert.ToUInt16(txtRegPC.Text, 16);
             EmulatedSystem.cpu.registers.sp = Convert.ToUInt16(txtRegSP.Text, 16);
             updateRegisterDisplay();
+        }
+
+        private void memoryMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(EmulatedSystem.memory.getMap(), "Memory Map");
+        }
+
+        private void sIOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sIOToolStripMenuItem.Checked = true;
+            diskJockeyToolStripMenuItem.Checked = false;
+            noneToolStripMenuItem.Checked = false;
+            formConsole.setConsolePort(frmConsole.consolePort.sio);
+        }
+
+        private void diskJockeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sIOToolStripMenuItem.Checked = false;
+            diskJockeyToolStripMenuItem.Checked = true;
+            noneToolStripMenuItem.Checked = false;
+            formConsole.setConsolePort(frmConsole.consolePort.dj);
+        }
+
+        private void noneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sIOToolStripMenuItem.Checked = false;
+            diskJockeyToolStripMenuItem.Checked = false;
+            noneToolStripMenuItem.Checked = true;
+            formConsole.setConsolePort(frmConsole.consolePort.none);
+        }
+
+        private void trackBarCycleDelay_ValueChanged(object sender, EventArgs e)
+        {
+            if (EmulatedSystem.cpu.running && trackBarCycleDelay.Value == 0) lblInstruction.Text = "(running)";
         }
     }
 }
