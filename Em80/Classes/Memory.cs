@@ -18,6 +18,7 @@ namespace Em80
             {
                 public int addr;
                 public byte val = 0xff;
+                public bool preview;
             }
 
             public static event EventHandler<MMIOEventArgs> MMIOWrite;
@@ -43,6 +44,7 @@ namespace Em80
                     {
                         MMIOEventArgs e = new MMIOEventArgs();
                         e.addr = addr;
+                        e.preview = preview;
                         MMIORead(null, e);
                         return e.val;
                     }

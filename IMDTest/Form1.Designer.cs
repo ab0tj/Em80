@@ -70,7 +70,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(636, 110);
+            this.groupBox1.Size = new System.Drawing.Size(651, 110);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Image Info";
@@ -83,7 +83,7 @@
             this.textComment.Name = "textComment";
             this.textComment.ReadOnly = true;
             this.textComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textComment.Size = new System.Drawing.Size(552, 72);
+            this.textComment.Size = new System.Drawing.Size(568, 72);
             this.textComment.TabIndex = 3;
             // 
             // label2
@@ -127,7 +127,7 @@
             this.groupBox2.Controls.Add(this.hexBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 157);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(636, 234);
+            this.groupBox2.Size = new System.Drawing.Size(651, 234);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sectors";
@@ -143,7 +143,7 @@
             // 
             // numHead
             // 
-            this.numHead.Location = new System.Drawing.Point(314, 14);
+            this.numHead.Location = new System.Drawing.Point(321, 14);
             this.numHead.Maximum = new decimal(new int[] {
             0,
             0,
@@ -152,12 +152,12 @@
             this.numHead.Name = "numHead";
             this.numHead.Size = new System.Drawing.Size(55, 20);
             this.numHead.TabIndex = 6;
-            this.numHead.ValueChanged += new System.EventHandler(this.numHead_ValueChanged);
+            this.numHead.ValueChanged += new System.EventHandler(this.numCylinder_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(275, 16);
+            this.label5.Location = new System.Drawing.Point(282, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 5;
@@ -165,7 +165,7 @@
             // 
             // numSector
             // 
-            this.numSector.Location = new System.Drawing.Point(429, 14);
+            this.numSector.Location = new System.Drawing.Point(436, 14);
             this.numSector.Maximum = new decimal(new int[] {
             1,
             0,
@@ -188,7 +188,7 @@
             // 
             // numCylinder
             // 
-            this.numCylinder.Location = new System.Drawing.Point(202, 14);
+            this.numCylinder.Location = new System.Drawing.Point(209, 14);
             this.numCylinder.Maximum = new decimal(new int[] {
             0,
             0,
@@ -202,7 +202,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(385, 16);
+            this.label4.Location = new System.Drawing.Point(392, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 2;
@@ -211,7 +211,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 16);
+            this.label3.Location = new System.Drawing.Point(159, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 1;
@@ -226,10 +226,11 @@
             this.hexBox1.Name = "hexBox1";
             this.hexBox1.ReadOnly = true;
             this.hexBox1.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexBox1.Size = new System.Drawing.Size(623, 174);
+            this.hexBox1.Size = new System.Drawing.Size(639, 174);
             this.hexBox1.StringViewVisible = true;
             this.hexBox1.TabIndex = 0;
             this.hexBox1.UseFixedBytesPerLine = true;
+            this.hexBox1.VScrollBarVisible = true;
             // 
             // openFileDialog1
             // 
@@ -239,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 403);
+            this.ClientSize = new System.Drawing.Size(675, 403);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);

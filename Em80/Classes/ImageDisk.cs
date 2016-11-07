@@ -11,7 +11,8 @@ namespace Em80
     {
         public class Sector
         {
-            public byte type;
+            public bool deleted;
+            public bool error;
             public byte[] data;
         }
 
@@ -28,11 +29,11 @@ namespace Em80
         public string header;
         public string comment;
         public int cylinders;
-        public int sectors;
         public int heads;
+        public bool ready;
         public bool hasChanges;
 
-        public ImageDisk(string fileName)
+        public void loadImage(string fileName)
         {
             imgData = new Track[2][];
             imgData[0] = new Track[80];
@@ -73,35 +74,28 @@ namespace Em80
 
                 for (int s = 0; s < secs; s++)   // loop through sector data records
                 {
-                    int sectorIndex = imgData[head][cyl].sectorMap[s];    // 1-indexed
-                    if (sectorIndex > sectors) { sectors = sectorIndex; }
-                    sectorIndex--;  // 0-indexed
+                    int sectorIndex = imgData[head][cyl].sectorMap[s] - 1;    // map is 1-indexed
 
                     imgData[head][cyl].sectorData[sectorIndex] = new Sector();
-                    imgData[head][cyl].sectorData[sectorIndex].type = imgReader.ReadByte();
+                    byte type = imgReader.ReadByte();
 
-                    switch (imgData[head][cyl].sectorData[sectorIndex].type)
+                    if (type != 0)  // 0 = unavailable
                     {
-                        case 0: // sector unavailable
-                            break;
+                        type--;
 
-                        case 1: // normal sector record
-                        case 3: // normal with deleted address mark
-                        case 5: // normal with read error
-                        case 7: // normal, deleted, read error
-                            imgData[head][cyl].sectorData[sectorIndex].data = imgReader.ReadBytes(secSz);
-                            break;
+                        if ((type & 0x01) == 0)
+                        {
+                            imgData[head][cyl].sectorData[sectorIndex].data = imgReader.ReadBytes(secSz);   // uncompressed
+                        }
+                        else
+                        {
+                            imgData[head][cyl].sectorData[sectorIndex].data = Enumerable.Repeat(imgReader.ReadByte(), secSz).ToArray();  // compressed
+                        }
 
-                        case 2: // compressed sector record
-                        case 4: // compressed with deleted address mark
-                        case 6: // compressed with read error
-                        case 8: // compressed, deleted, read error
-                            imgData[head][cyl].sectorData[sectorIndex].data = Enumerable.Repeat(imgReader.ReadByte(), secSz).ToArray();  // uncompressed
-                            break;
-
-                        default:    // ??
-                            throw new Exception("Encountered unsupported sector type");
+                        if ((type & 0x02) == 1) imgData[head][cyl].sectorData[sectorIndex].deleted = true;  // deleted mark
+                        if ((type & 0x04) == 1) imgData[head][cyl].sectorData[sectorIndex].error = true;    // erased mark
                     }
+                    else imgData[head][cyl].sectorData[sectorIndex].error = true;
                 }
             }
 
@@ -109,6 +103,8 @@ namespace Em80
             heads++;
 
             imgReader.Close();
+
+            ready = true;
         }
 
         public string getModeString(byte cyl, byte head)
@@ -132,38 +128,20 @@ namespace Em80
             }
         }
 
-        public string getTypeString(byte cyl, byte head, byte sec)
-        {
-            sec--;
-            switch (imgData[head][cyl].sectorData[sec].type)
-            {
-                case 0:
-                    return "Unreadable";
-                case 1:
-                    return "Normal";
-                case 2:
-                    return "Compressed";
-                case 3:
-                    return "Normal, deleted";
-                case 4:
-                    return "Compressed, deleted";
-                case 5:
-                    return "Normal, read error";
-                case 6:
-                    return "Compressed, read error";
-                case 7:
-                    return "Normal, deleted, read error";
-                case 8:
-                    return "Compressed, deleted, read error";
-                default:
-                    return "Unknown type";
-            }
-        }
-
         public Sector getSector(byte cyl, byte head, byte sec)
         {
             sec--;
             return imgData[head][cyl].sectorData[sec];
+        }
+
+        public int getSectorSize(byte cyl, byte head, byte sec)
+        {
+            return imgData[head][cyl].sectorData[sec].data.Length;
+        }
+
+        public byte getNumSectors(byte cyl, byte head)
+        {
+            return imgData[head][cyl].sectors;
         }
     }
 }

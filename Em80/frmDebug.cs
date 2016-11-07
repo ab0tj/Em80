@@ -15,6 +15,8 @@ namespace Em80
     {
         frmConsole formConsole = new frmConsole();
 
+        int instructions;
+
         public frmDebug()
         {
             InitializeComponent();
@@ -121,6 +123,8 @@ namespace Em80
             updateMemoryFromHex();
             updateRegistersFromTextBoxes();
 
+            ushort breakpoint = Convert.ToUInt16(txtBreakpoint.Text, 16);
+
             EmulatedSystem.cpu.running = true;
             txtRegA.ReadOnly = true;
             txtRegB.ReadOnly = true;
@@ -132,27 +136,35 @@ namespace Em80
             txtRegL.ReadOnly = true;
             txtRegPC.ReadOnly = true;
             txtRegSP.ReadOnly = true;
+            txtBreakpoint.ReadOnly = true;
             hexMemory.ReadOnly = true;
             btnRunStop.Enabled = false;
             btnStep.Text = "&Stop";
             lblInstruction.Text = "(running)";
+            timerIPS.Enabled = true;
 
             while (EmulatedSystem.cpu.running)
             {
                 if (trackBarCycleDelay.Value == 0)
                 {
+                    if (checkBreakpoint.Checked && EmulatedSystem.cpu.registers.pc == breakpoint) break;
                     EmulatedSystem.cpu.exec();
+                    instructions++;
                     Application.DoEvents();
                 }
                 else
                 {
                     Step();
+                    instructions++;
                     System.Threading.Thread.Sleep(trackBarCycleDelay.Value);
                     Application.DoEvents();
                 }
             }
 
             try {
+                EmulatedSystem.cpu.running = false;
+                timerIPS.Enabled = false;
+                Text = "em80";
                 provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
                 hexMemory.ByteProvider = provMem;
                 updateRegisterDisplay();
@@ -167,6 +179,7 @@ namespace Em80
                 txtRegL.ReadOnly = false;
                 txtRegPC.ReadOnly = false;
                 txtRegSP.ReadOnly = false;
+                txtBreakpoint.ReadOnly = false;
                 hexMemory.ReadOnly = false;
                 btnRunStop.Enabled = true;
                 btnStep.Text = "&Step";
@@ -240,7 +253,7 @@ namespace Em80
 
         private void ValidateHexInput(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar > 47 && e.KeyChar < 58) || (e.KeyChar > 64 && e.KeyChar < 71))   // 0-9, A-F
+            if ((e.KeyChar > 47 && e.KeyChar < 58) || (e.KeyChar > 64 && e.KeyChar < 71) || e.KeyChar == 8)   // 0-9, A-F, backspace
             {
                 return;
             }
@@ -302,6 +315,26 @@ namespace Em80
         private void trackBarCycleDelay_ValueChanged(object sender, EventArgs e)
         {
             if (EmulatedSystem.cpu.running && trackBarCycleDelay.Value == 0) lblInstruction.Text = "(running)";
+        }
+
+        private void timerIPS_Tick(object sender, EventArgs e)
+        {
+            Text = "em80 " + instructions.ToString() + "ips";
+            instructions = 0;
+        }
+
+        private void loadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.ShowDialog();
+
+            try
+            {
+                EmulatedSystem.DiskJockey.insertDisk(0, openFileDialog2.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error loading image");
+            }
         }
     }
 }

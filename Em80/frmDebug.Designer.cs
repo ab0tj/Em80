@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDebug));
             this.groupRegisters = new System.Windows.Forms.GroupBox();
             this.lblFlagC = new System.Windows.Forms.Label();
@@ -77,15 +78,35 @@
             this.diskJockeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memoryClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drive0ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drive1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.drive2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejectToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.drive3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejectToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblInstruction = new System.Windows.Forms.Label();
+            this.timerIPS = new System.Windows.Forms.Timer(this.components);
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBreakpoint = new System.Windows.Forms.CheckBox();
+            this.txtBreakpoint = new System.Windows.Forms.TextBox();
             this.groupRegisters.SuspendLayout();
             this.groupMemory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupRegisters
@@ -386,7 +407,7 @@
             this.groupMemory.Controls.Add(this.hexMemory);
             this.groupMemory.Location = new System.Drawing.Point(12, 27);
             this.groupMemory.Name = "groupMemory";
-            this.groupMemory.Size = new System.Drawing.Size(649, 373);
+            this.groupMemory.Size = new System.Drawing.Size(649, 422);
             this.groupMemory.TabIndex = 1;
             this.groupMemory.TabStop = false;
             this.groupMemory.Text = "Memory";
@@ -402,7 +423,7 @@
             this.hexMemory.Location = new System.Drawing.Point(6, 19);
             this.hexMemory.Name = "hexMemory";
             this.hexMemory.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexMemory.Size = new System.Drawing.Size(637, 348);
+            this.hexMemory.Size = new System.Drawing.Size(637, 397);
             this.hexMemory.StringViewVisible = true;
             this.hexMemory.TabIndex = 0;
             this.hexMemory.UseFixedBytesPerLine = true;
@@ -411,7 +432,7 @@
             // btnStep
             // 
             this.btnStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStep.Location = new System.Drawing.Point(667, 348);
+            this.btnStep.Location = new System.Drawing.Point(667, 397);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
             this.btnStep.TabIndex = 12;
@@ -422,7 +443,7 @@
             // btnRunStop
             // 
             this.btnRunStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRunStop.Location = new System.Drawing.Point(744, 348);
+            this.btnRunStop.Location = new System.Drawing.Point(744, 397);
             this.btnRunStop.Name = "btnRunStop";
             this.btnRunStop.Size = new System.Drawing.Size(75, 23);
             this.btnRunStop.TabIndex = 13;
@@ -433,7 +454,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(667, 377);
+            this.btnReset.Location = new System.Drawing.Point(667, 426);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 14;
@@ -444,7 +465,7 @@
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(744, 377);
+            this.btnClear.Location = new System.Drawing.Point(744, 426);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 15;
@@ -455,7 +476,7 @@
             // trackBarCycleDelay
             // 
             this.trackBarCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarCycleDelay.Location = new System.Drawing.Point(672, 297);
+            this.trackBarCycleDelay.Location = new System.Drawing.Point(672, 346);
             this.trackBarCycleDelay.Maximum = 1000;
             this.trackBarCycleDelay.Name = "trackBarCycleDelay";
             this.trackBarCycleDelay.Size = new System.Drawing.Size(144, 45);
@@ -468,7 +489,7 @@
             // 
             this.lblCycleDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCycleDelay.AutoSize = true;
-            this.lblCycleDelay.Location = new System.Drawing.Point(701, 329);
+            this.lblCycleDelay.Location = new System.Drawing.Point(701, 378);
             this.lblCycleDelay.Name = "lblCycleDelay";
             this.lblCycleDelay.Size = new System.Drawing.Size(88, 13);
             this.lblCycleDelay.TabIndex = 9;
@@ -480,7 +501,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.consoleToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.diskToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(828, 24);
@@ -523,14 +545,14 @@
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.showToolStripMenuItem.Text = "&Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -541,7 +563,7 @@
             this.diskJockeyToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
-            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.sourceToolStripMenuItem.Text = "&Source";
             // 
             // sIOToolStripMenuItem
@@ -549,38 +571,143 @@
             this.sIOToolStripMenuItem.Checked = true;
             this.sIOToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sIOToolStripMenuItem.Name = "sIOToolStripMenuItem";
-            this.sIOToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sIOToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.sIOToolStripMenuItem.Text = "&SIO";
             this.sIOToolStripMenuItem.Click += new System.EventHandler(this.sIOToolStripMenuItem_Click);
             // 
             // diskJockeyToolStripMenuItem
             // 
             this.diskJockeyToolStripMenuItem.Name = "diskJockeyToolStripMenuItem";
-            this.diskJockeyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.diskJockeyToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.diskJockeyToolStripMenuItem.Text = "&DiskJockey";
             this.diskJockeyToolStripMenuItem.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.noneToolStripMenuItem.Text = "&None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.memoryClearToolStripMenuItem,
             this.memoryMapToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.toolsToolStripMenuItem.Text = "&Memory";
+            // 
+            // memoryClearToolStripMenuItem
+            // 
+            this.memoryClearToolStripMenuItem.Name = "memoryClearToolStripMenuItem";
+            this.memoryClearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.memoryClearToolStripMenuItem.Text = "&Clear";
+            this.memoryClearToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.memoryClearToolStripMenuItem.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // memoryMapToolStripMenuItem
             // 
             this.memoryMapToolStripMenuItem.Name = "memoryMapToolStripMenuItem";
-            this.memoryMapToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.memoryMapToolStripMenuItem.Text = "&Memory Map";
+            this.memoryMapToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.memoryMapToolStripMenuItem.Text = "&Map";
             this.memoryMapToolStripMenuItem.Click += new System.EventHandler(this.memoryMapToolStripMenuItem_Click);
+            // 
+            // diskToolStripMenuItem
+            // 
+            this.diskToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drive0ToolStripMenuItem,
+            this.drive1ToolStripMenuItem,
+            this.drive2ToolStripMenuItem,
+            this.drive3ToolStripMenuItem});
+            this.diskToolStripMenuItem.Name = "diskToolStripMenuItem";
+            this.diskToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.diskToolStripMenuItem.Text = "&Disk";
+            // 
+            // drive0ToolStripMenuItem
+            // 
+            this.drive0ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem1,
+            this.ejectToolStripMenuItem});
+            this.drive0ToolStripMenuItem.Name = "drive0ToolStripMenuItem";
+            this.drive0ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive0ToolStripMenuItem.Text = "Drive &0";
+            // 
+            // loadToolStripMenuItem1
+            // 
+            this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem1.Text = "&Load";
+            this.loadToolStripMenuItem1.Click += new System.EventHandler(this.loadToolStripMenuItem1_Click);
+            // 
+            // ejectToolStripMenuItem
+            // 
+            this.ejectToolStripMenuItem.Name = "ejectToolStripMenuItem";
+            this.ejectToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem.Text = "&Eject";
+            // 
+            // drive1ToolStripMenuItem
+            // 
+            this.drive1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem2,
+            this.ejectToolStripMenuItem1});
+            this.drive1ToolStripMenuItem.Name = "drive1ToolStripMenuItem";
+            this.drive1ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive1ToolStripMenuItem.Text = "Drive &1";
+            // 
+            // loadToolStripMenuItem2
+            // 
+            this.loadToolStripMenuItem2.Name = "loadToolStripMenuItem2";
+            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem2.Text = "&Load";
+            // 
+            // ejectToolStripMenuItem1
+            // 
+            this.ejectToolStripMenuItem1.Name = "ejectToolStripMenuItem1";
+            this.ejectToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem1.Text = "&Eject";
+            // 
+            // drive2ToolStripMenuItem
+            // 
+            this.drive2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem3,
+            this.ejectToolStripMenuItem2});
+            this.drive2ToolStripMenuItem.Name = "drive2ToolStripMenuItem";
+            this.drive2ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive2ToolStripMenuItem.Text = "Drive &2";
+            // 
+            // loadToolStripMenuItem3
+            // 
+            this.loadToolStripMenuItem3.Name = "loadToolStripMenuItem3";
+            this.loadToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem3.Text = "&Load";
+            // 
+            // ejectToolStripMenuItem2
+            // 
+            this.ejectToolStripMenuItem2.Name = "ejectToolStripMenuItem2";
+            this.ejectToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem2.Text = "&Eject";
+            // 
+            // drive3ToolStripMenuItem
+            // 
+            this.drive3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem4,
+            this.ejectToolStripMenuItem3});
+            this.drive3ToolStripMenuItem.Name = "drive3ToolStripMenuItem";
+            this.drive3ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive3ToolStripMenuItem.Text = "Drive &3";
+            // 
+            // loadToolStripMenuItem4
+            // 
+            this.loadToolStripMenuItem4.Name = "loadToolStripMenuItem4";
+            this.loadToolStripMenuItem4.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem4.Text = "&Load";
+            // 
+            // ejectToolStripMenuItem3
+            // 
+            this.ejectToolStripMenuItem3.Name = "ejectToolStripMenuItem3";
+            this.ejectToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem3.Text = "&Eject";
             // 
             // openFileDialog1
             // 
@@ -606,11 +733,53 @@
             this.lblInstruction.TabIndex = 0;
             this.lblInstruction.Text = "NOP";
             // 
+            // timerIPS
+            // 
+            this.timerIPS.Interval = 1000;
+            this.timerIPS.Tick += new System.EventHandler(this.timerIPS_Tick);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.Filter = "ImageDisk Image (*.IMD)|*.imd|All Files (*.*)|*.*";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.txtBreakpoint);
+            this.groupBox2.Controls.Add(this.checkBreakpoint);
+            this.groupBox2.Location = new System.Drawing.Point(667, 297);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(149, 43);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Breakpoint";
+            // 
+            // checkBreakpoint
+            // 
+            this.checkBreakpoint.AutoSize = true;
+            this.checkBreakpoint.Location = new System.Drawing.Point(13, 20);
+            this.checkBreakpoint.Name = "checkBreakpoint";
+            this.checkBreakpoint.Size = new System.Drawing.Size(15, 14);
+            this.checkBreakpoint.TabIndex = 0;
+            this.checkBreakpoint.UseVisualStyleBackColor = true;
+            // 
+            // txtBreakpoint
+            // 
+            this.txtBreakpoint.Location = new System.Drawing.Point(37, 17);
+            this.txtBreakpoint.MaxLength = 4;
+            this.txtBreakpoint.Name = "txtBreakpoint";
+            this.txtBreakpoint.Size = new System.Drawing.Size(92, 20);
+            this.txtBreakpoint.TabIndex = 1;
+            this.txtBreakpoint.Text = "0000";
+            this.txtBreakpoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBreakpoint.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 412);
+            this.ClientSize = new System.Drawing.Size(828, 461);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblCycleDelay);
@@ -635,6 +804,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -694,6 +865,25 @@
         private System.Windows.Forms.ToolStripMenuItem sIOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
+        private System.Windows.Forms.Timer timerIPS;
+        private System.Windows.Forms.ToolStripMenuItem diskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drive0ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ejectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drive1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ejectToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem drive2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem ejectToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem drive3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem ejectToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem memoryClearToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtBreakpoint;
+        private System.Windows.Forms.CheckBox checkBreakpoint;
     }
 }
 

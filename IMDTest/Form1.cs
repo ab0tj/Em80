@@ -37,8 +37,10 @@ namespace Em80
 
         private void readImage()
         {
+            disk = new ImageDisk();
+
             try {
-                disk = new ImageDisk(openFileDialog1.FileName);
+                disk.loadImage(openFileDialog1.FileName);
             }
             catch (Exception ex)
             {
@@ -54,7 +56,7 @@ namespace Em80
             numHead.Maximum = disk.heads - 1;
             numHead.Value = 0;
             numSector.Minimum = 0;
-            numSector.Maximum = disk.sectors + 1;
+            numSector.Maximum = disk.getNumSectors(0, 0) + 1;
             numSector.Value = 1;
 
             updateSectorDisplay();
@@ -62,12 +64,11 @@ namespace Em80
 
         private void numCylinder_ValueChanged(object sender, EventArgs e)
         {
-            if (numSector.Value < numSector.Maximum && numSector.Value > numSector.Minimum) updateSectorDisplay();
-        }
-
-        private void numHead_ValueChanged(object sender, EventArgs e)
-        {
-            if (numSector.Value < numSector.Maximum && numSector.Value > numSector.Minimum) updateSectorDisplay();
+                int s = disk.getNumSectors((byte)numCylinder.Value, (byte)numHead.Value);
+                if (numSector.Value > s) numSector.Value = s;
+                numSector.Maximum = s + 1;
+                if (numSector.Value != numSector.Minimum) updateSectorDisplay();
+          
         }
 
         private void numSector_ValueChanged(object sender, EventArgs e)
@@ -123,7 +124,8 @@ namespace Em80
 
             hexBox1.ByteProvider = new Be.Windows.Forms.DynamicByteProvider(sector.data);
 
-            lblSectorInfo.Text = disk.getTypeString(cyl, head, sec);
+            lblSectorInfo.Text = sector.deleted ? "Deleted" : "Not deleted";
+            lblSectorInfo.Text += sector.error ? ", error" : ", no error";
             lblSectorInfo.Text += ", " + disk.getModeString(cyl, head);
             lblSectorInfo.Text += ", " + sector.data.Length.ToString() + " bytes.";
         }
