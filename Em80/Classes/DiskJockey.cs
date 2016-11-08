@@ -110,11 +110,10 @@ namespace Em80
                         break;
 
                     case 2: // Disk Jockey status register
-                        e.val = 1;
-                        // bit 0: head
+                        e.val = 0x09;  // bit 0: head
                         if (status.busy) e.val |= 0x02;   // bit 1: datarq
                         // bit 2: intrq
-                        if (drives[selectedDrive].heads == 2 && drives[selectedDrive].ready) e.val |= 0x08; // bit 3: n2sided
+                        if (currentDrive.heads == 2 && currentDrive.ready) e.val &= 0xf7; // bit 3: n2sided
 
                         if (!status.busy)
                         {
@@ -225,7 +224,7 @@ namespace Em80
                 sectorBuff = drives[selectedDrive].getSector(registers.track, selectedHead, registers.sector);   // get the sector from the image
                 sectorPos = 0;
 
-                if (sectorBuff.deleted)
+                if (sectorBuff == null || sectorBuff.deleted)
                 {
                     registers.status |= 0x10;
                 }
@@ -283,31 +282,30 @@ namespace Em80
                         status.direction = (registers.data > registers.track);
                         if ((c & 0x10) == 0) registers.track = 0;   // restore
                         else registers.track = registers.data;      // seek
-                        status.resetbusy = true;
+                        setType1Flags();
                         break;
 
                     case 0x20:  // step
                         if (status.direction) registers.track++;    // step in
                         else registers.track--; // step out
-                        status.resetbusy = true;
+                        setType1Flags();
                         break;
 
                     case 0x40:  // step in
                         status.direction = true;
                         registers.track++;
-                        status.resetbusy = true;
+                        setType1Flags();
                         break;
 
                     case 0x60:  // step out
                         status.direction = false;
                         registers.track--;
-                        status.resetbusy = true;
+                        setType1Flags();
                         break;
 
                     case 0x80:  // read
                         status.multisect = (c & 0x10) == 0x10;
                         loadSector();
-                        status.busy = true;
                         status.read = true;
                         registers.status = 0x02;    // drq
                         break;
@@ -316,7 +314,6 @@ namespace Em80
                         status.multisect = (c & 0x10) == 0x10;
                         sectorBuff = new ImageDisk.Sector();
                         sectorBuff.data = new byte[currentDrive.getSectorSize(registers.track, selectedHead, registers.sector)];
-                        status.busy = true;
                         status.write = true;
                         registers.status = 0x02;
                         break;
@@ -334,6 +331,18 @@ namespace Em80
                             if (registers.sector > currentDrive.getNumSectors(registers.track, selectedHead)) registers.sector = 1;
                             sectorBuff = new ImageDisk.Sector();
                             sectorBuff.data = getHeader();
+
+                            if (sectorBuff.data == null)
+                            {
+                                registers.status |= 0x80;
+                                status.busy = false;
+                                break;
+                            }
+                            else
+                            {
+                                registers.status = 0x02;
+                            }
+
                             sectorPos = 0;
                             status.read = true;
                         }
@@ -345,15 +354,35 @@ namespace Em80
                 }
             }
 
+            private static void setType1Flags()
+            {
+                if (registers.track == 0)
+                {
+                    registers.status = 0x04;
+                }
+                else
+                {
+                    registers.status = 0;
+                }
+
+                status.resetbusy = true;
+            }
+
             private static byte[] getHeader()
             {
+                int s = currentDrive.getSectorSize(registers.track, selectedHead, registers.sector);
+                if (s == -1)
+                {
+                    return null;
+                }
+
                 byte[] h = new byte[6];
 
                 h[0] = registers.track;
                 h[1] = selectedHead;
                 h[2] = registers.sector;
 
-                switch (currentDrive.getSectorSize(registers.track, selectedHead, registers.sector))
+                switch (s)
                 {
                     case 128:
                         h[3] = 0;

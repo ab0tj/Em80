@@ -131,12 +131,27 @@ namespace Em80
         public Sector getSector(byte cyl, byte head, byte sec)
         {
             sec--;
-            return imgData[head][cyl].sectorData[sec];
+            try
+            {
+                return imgData[head][cyl].sectorData[sec];
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public int getSectorSize(byte cyl, byte head, byte sec)
         {
-            return imgData[head][cyl].sectorData[sec].data.Length;
+            sec--;
+            try
+            {
+                return imgData[head][cyl].sectorData[sec].data.Length;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         public byte getNumSectors(byte cyl, byte head)
