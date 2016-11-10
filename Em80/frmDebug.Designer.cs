@@ -99,8 +99,8 @@
             this.timerIPS = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBreakpoint = new System.Windows.Forms.CheckBox();
             this.txtBreakpoint = new System.Windows.Forms.TextBox();
+            this.checkBreakpoint = new System.Windows.Forms.CheckBox();
             this.groupRegisters.SuspendLayout();
             this.groupMemory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).BeginInit();
@@ -545,14 +545,14 @@
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.showToolStripMenuItem.Text = "&Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -563,7 +563,7 @@
             this.diskJockeyToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
-            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sourceToolStripMenuItem.Text = "&Source";
             // 
             // sIOToolStripMenuItem
@@ -630,7 +630,7 @@
             this.loadToolStripMenuItem1,
             this.ejectToolStripMenuItem});
             this.drive0ToolStripMenuItem.Name = "drive0ToolStripMenuItem";
-            this.drive0ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive0ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.drive0ToolStripMenuItem.Text = "Drive &0";
             // 
             // loadToolStripMenuItem1
@@ -652,19 +652,20 @@
             this.loadToolStripMenuItem2,
             this.ejectToolStripMenuItem1});
             this.drive1ToolStripMenuItem.Name = "drive1ToolStripMenuItem";
-            this.drive1ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.drive1ToolStripMenuItem.Text = "Drive &1";
             // 
             // loadToolStripMenuItem2
             // 
             this.loadToolStripMenuItem2.Name = "loadToolStripMenuItem2";
-            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem2.Text = "&Load";
+            this.loadToolStripMenuItem2.Click += new System.EventHandler(this.loadToolStripMenuItem2_Click);
             // 
             // ejectToolStripMenuItem1
             // 
             this.ejectToolStripMenuItem1.Name = "ejectToolStripMenuItem1";
-            this.ejectToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.ejectToolStripMenuItem1.Text = "&Eject";
             // 
             // drive2ToolStripMenuItem
@@ -673,19 +674,20 @@
             this.loadToolStripMenuItem3,
             this.ejectToolStripMenuItem2});
             this.drive2ToolStripMenuItem.Name = "drive2ToolStripMenuItem";
-            this.drive2ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.drive2ToolStripMenuItem.Text = "Drive &2";
             // 
             // loadToolStripMenuItem3
             // 
             this.loadToolStripMenuItem3.Name = "loadToolStripMenuItem3";
-            this.loadToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem3.Text = "&Load";
+            this.loadToolStripMenuItem3.Click += new System.EventHandler(this.loadToolStripMenuItem3_Click);
             // 
             // ejectToolStripMenuItem2
             // 
             this.ejectToolStripMenuItem2.Name = "ejectToolStripMenuItem2";
-            this.ejectToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.ejectToolStripMenuItem2.Text = "&Eject";
             // 
             // drive3ToolStripMenuItem
@@ -694,19 +696,20 @@
             this.loadToolStripMenuItem4,
             this.ejectToolStripMenuItem3});
             this.drive3ToolStripMenuItem.Name = "drive3ToolStripMenuItem";
-            this.drive3ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.drive3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.drive3ToolStripMenuItem.Text = "Drive &3";
             // 
             // loadToolStripMenuItem4
             // 
             this.loadToolStripMenuItem4.Name = "loadToolStripMenuItem4";
-            this.loadToolStripMenuItem4.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem4.Text = "&Load";
+            this.loadToolStripMenuItem4.Click += new System.EventHandler(this.loadToolStripMenuItem4_Click);
             // 
             // ejectToolStripMenuItem3
             // 
             this.ejectToolStripMenuItem3.Name = "ejectToolStripMenuItem3";
-            this.ejectToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.ejectToolStripMenuItem3.Text = "&Eject";
             // 
             // openFileDialog1
@@ -754,15 +757,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Breakpoint";
             // 
-            // checkBreakpoint
-            // 
-            this.checkBreakpoint.AutoSize = true;
-            this.checkBreakpoint.Location = new System.Drawing.Point(13, 20);
-            this.checkBreakpoint.Name = "checkBreakpoint";
-            this.checkBreakpoint.Size = new System.Drawing.Size(15, 14);
-            this.checkBreakpoint.TabIndex = 0;
-            this.checkBreakpoint.UseVisualStyleBackColor = true;
-            // 
             // txtBreakpoint
             // 
             this.txtBreakpoint.Location = new System.Drawing.Point(37, 17);
@@ -773,6 +767,15 @@
             this.txtBreakpoint.Text = "0000";
             this.txtBreakpoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtBreakpoint.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateHexInput);
+            // 
+            // checkBreakpoint
+            // 
+            this.checkBreakpoint.AutoSize = true;
+            this.checkBreakpoint.Location = new System.Drawing.Point(13, 20);
+            this.checkBreakpoint.Name = "checkBreakpoint";
+            this.checkBreakpoint.Size = new System.Drawing.Size(15, 14);
+            this.checkBreakpoint.TabIndex = 0;
+            this.checkBreakpoint.UseVisualStyleBackColor = true;
             // 
             // frmDebug
             // 

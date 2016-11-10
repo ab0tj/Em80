@@ -36,7 +36,7 @@ namespace Em80
         {
             string theExt = Path.GetExtension(theFileName);
 
-            if (theExt == ".hex")
+            if (theExt.ToLower() == ".hex")
             {
                 radioBin.Checked = false;
                 radioHex.Checked = true;

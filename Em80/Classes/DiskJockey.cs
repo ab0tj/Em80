@@ -196,7 +196,7 @@ namespace Em80
 
                     case 7: // 1791 data register
                         registers.data = e.val;
-                        if (status.write) writeByte();
+                        if (status.write) writeByte(e.val);
                         break;
                 }
             }
@@ -265,10 +265,30 @@ namespace Em80
                 return b;
             }
 
-            private static void writeByte()
+            private static void writeByte(byte data)
             {
                 /* Write a byte into the sector buffer.
                  * Assumes the buffer has been set up for us already and the byte is in data register. */
+                sectorBuff.data[sectorPos++] = data;
+
+                if (sectorPos == sectorBuff.data.Length)    // last byte
+                {
+                    currentDrive.putSector(registers.track, selectedHead, registers.sector, sectorBuff);
+                    
+                    if (status.multisect)
+                    {
+                        registers.sector++;
+                        sectorBuff = new ImageDisk.Sector();
+                        sectorBuff.data = new byte[currentDrive.getSectorSize(registers.track, selectedHead, registers.sector)];
+                        sectorPos = 0;
+                    }
+                    else
+                    {
+                        status.write = false;
+                        status.busy = false;
+                        registers.status &= 0xfd;   // drq off
+                    }
+                }
             }
 
             private static void doCommand(byte c)
@@ -314,6 +334,7 @@ namespace Em80
                         status.multisect = (c & 0x10) == 0x10;
                         sectorBuff = new ImageDisk.Sector();
                         sectorBuff.data = new byte[currentDrive.getSectorSize(registers.track, selectedHead, registers.sector)];
+                        sectorPos = 0;
                         status.write = true;
                         registers.status = 0x02;
                         break;

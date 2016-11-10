@@ -130,7 +130,7 @@ namespace Em80
 
         public Sector getSector(byte cyl, byte head, byte sec)
         {
-            sec--;
+            sec--;  // adjust for 0-based array
             try
             {
                 return imgData[head][cyl].sectorData[sec];
@@ -157,6 +157,20 @@ namespace Em80
         public byte getNumSectors(byte cyl, byte head)
         {
             return imgData[head][cyl].sectors;
+        }
+
+        public bool putSector(byte cyl, byte head, byte sec, Sector data)
+        {
+            sec--;
+            try
+            {
+                imgData[head][cyl].sectorData[sec] = data;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

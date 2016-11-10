@@ -323,18 +323,38 @@ namespace Em80
             instructions = 0;
         }
 
-        private void loadToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void loadDiskImage(int drive)
         {
             openFileDialog2.ShowDialog();
 
             try
             {
-                EmulatedSystem.DiskJockey.insertDisk(0, openFileDialog2.FileName);
+                EmulatedSystem.DiskJockey.insertDisk(drive, openFileDialog2.FileName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error loading image");
             }
+        }
+
+        private void loadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            loadDiskImage(0);
+        }
+
+        private void loadToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            loadDiskImage(1);
+        }
+
+        private void loadToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            loadDiskImage(2);
+        }
+
+        private void loadToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            loadDiskImage(3);
         }
     }
 }

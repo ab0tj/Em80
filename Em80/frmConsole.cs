@@ -28,6 +28,8 @@ namespace Em80
             {
                 // this was a backspace
                 if (textBox1.Text.Length > 0) textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
+                textBox1.SelectionStart = textBox1.Text.Length;
+                textBox1.ScrollToCaret();
             }
             else
             {
