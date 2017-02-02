@@ -936,30 +936,35 @@
             this.iMSAISIOPortAToolStripMenuItem.Name = "iMSAISIOPortAToolStripMenuItem";
             this.iMSAISIOPortAToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortAToolStripMenuItem.Text = "&IMSAI SIO Port A";
+            this.iMSAISIOPortAToolStripMenuItem.Click += new System.EventHandler(this.iMSAISIOPortAToolStripMenuItem_Click);
             // 
             // iMSAISIOPortBToolStripMenuItem
             // 
             this.iMSAISIOPortBToolStripMenuItem.Name = "iMSAISIOPortBToolStripMenuItem";
             this.iMSAISIOPortBToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortBToolStripMenuItem.Text = "I&MSAI SIO Port B";
+            this.iMSAISIOPortBToolStripMenuItem.Click += new System.EventHandler(this.iMSAISIOPortBToolStripMenuItem_Click);
             // 
             // altairSIOToolStripMenuItem1
             // 
             this.altairSIOToolStripMenuItem1.Name = "altairSIOToolStripMenuItem1";
             this.altairSIOToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.altairSIOToolStripMenuItem1.Text = "&Altair SIO";
+            this.altairSIOToolStripMenuItem1.Click += new System.EventHandler(this.altairSIOToolStripMenuItem1_Click);
             // 
             // diskJockeyToolStripMenuItem1
             // 
             this.diskJockeyToolStripMenuItem1.Name = "diskJockeyToolStripMenuItem1";
             this.diskJockeyToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.diskJockeyToolStripMenuItem1.Text = "&Disk Jockey";
+            this.diskJockeyToolStripMenuItem1.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem1_Click);
             // 
             // rubeCronUSBToolStripMenuItem1
             // 
             this.rubeCronUSBToolStripMenuItem1.Name = "rubeCronUSBToolStripMenuItem1";
             this.rubeCronUSBToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.rubeCronUSBToolStripMenuItem1.Text = "&RubeCron USB";
+            this.rubeCronUSBToolStripMenuItem1.Click += new System.EventHandler(this.rubeCronUSBToolStripMenuItem1_Click);
             // 
             // noneToolStripMenuItem1
             // 
@@ -968,36 +973,42 @@
             this.noneToolStripMenuItem1.Name = "noneToolStripMenuItem1";
             this.noneToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.noneToolStripMenuItem1.Text = "&None";
+            this.noneToolStripMenuItem1.Click += new System.EventHandler(this.noneToolStripMenuItem1_Click);
             // 
             // iMSAISIOPortAToolStripMenuItem1
             // 
             this.iMSAISIOPortAToolStripMenuItem1.Name = "iMSAISIOPortAToolStripMenuItem1";
             this.iMSAISIOPortAToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortAToolStripMenuItem1.Text = "&IMSAI SIO Port A";
+            this.iMSAISIOPortAToolStripMenuItem1.Click += new System.EventHandler(this.iMSAISIOPortAToolStripMenuItem1_Click);
             // 
             // iMSAISIOPortBToolStripMenuItem1
             // 
             this.iMSAISIOPortBToolStripMenuItem1.Name = "iMSAISIOPortBToolStripMenuItem1";
             this.iMSAISIOPortBToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortBToolStripMenuItem1.Text = "I&MSAI SIO Port B";
+            this.iMSAISIOPortBToolStripMenuItem1.Click += new System.EventHandler(this.iMSAISIOPortBToolStripMenuItem1_Click);
             // 
             // altairSIOToolStripMenuItem2
             // 
             this.altairSIOToolStripMenuItem2.Name = "altairSIOToolStripMenuItem2";
             this.altairSIOToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.altairSIOToolStripMenuItem2.Text = "&Altair SIO";
+            this.altairSIOToolStripMenuItem2.Click += new System.EventHandler(this.altairSIOToolStripMenuItem2_Click);
             // 
             // diskJockeyToolStripMenuItem2
             // 
             this.diskJockeyToolStripMenuItem2.Name = "diskJockeyToolStripMenuItem2";
             this.diskJockeyToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.diskJockeyToolStripMenuItem2.Text = "&Disk Jockey";
+            this.diskJockeyToolStripMenuItem2.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem2_Click);
             // 
             // rubeCronUSBToolStripMenuItem2
             // 
             this.rubeCronUSBToolStripMenuItem2.Name = "rubeCronUSBToolStripMenuItem2";
             this.rubeCronUSBToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.rubeCronUSBToolStripMenuItem2.Text = "&RubeCron USB";
+            this.rubeCronUSBToolStripMenuItem2.Click += new System.EventHandler(this.rubeCronUSBToolStripMenuItem2_Click);
             // 
             // noneToolStripMenuItem2
             // 
@@ -1006,36 +1017,42 @@
             this.noneToolStripMenuItem2.Name = "noneToolStripMenuItem2";
             this.noneToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.noneToolStripMenuItem2.Text = "&None";
+            this.noneToolStripMenuItem2.Click += new System.EventHandler(this.noneToolStripMenuItem2_Click);
             // 
             // iMSAISIOPortAToolStripMenuItem2
             // 
             this.iMSAISIOPortAToolStripMenuItem2.Name = "iMSAISIOPortAToolStripMenuItem2";
             this.iMSAISIOPortAToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortAToolStripMenuItem2.Text = "&IMSAI SIO Port A";
+            this.iMSAISIOPortAToolStripMenuItem2.Click += new System.EventHandler(this.iMSAISIOPortAToolStripMenuItem2_Click);
             // 
             // iMSAISIOPortBToolStripMenuItem2
             // 
             this.iMSAISIOPortBToolStripMenuItem2.Name = "iMSAISIOPortBToolStripMenuItem2";
             this.iMSAISIOPortBToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
             this.iMSAISIOPortBToolStripMenuItem2.Text = "I&MSAI SIO Port B";
+            this.iMSAISIOPortBToolStripMenuItem2.Click += new System.EventHandler(this.iMSAISIOPortBToolStripMenuItem2_Click);
             // 
             // altairSIOToolStripMenuItem3
             // 
             this.altairSIOToolStripMenuItem3.Name = "altairSIOToolStripMenuItem3";
             this.altairSIOToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
             this.altairSIOToolStripMenuItem3.Text = "&Altair SIO";
+            this.altairSIOToolStripMenuItem3.Click += new System.EventHandler(this.altairSIOToolStripMenuItem3_Click);
             // 
             // diskJockeyToolStripMenuItem3
             // 
             this.diskJockeyToolStripMenuItem3.Name = "diskJockeyToolStripMenuItem3";
             this.diskJockeyToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
             this.diskJockeyToolStripMenuItem3.Text = "&Disk Jockey";
+            this.diskJockeyToolStripMenuItem3.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem3_Click);
             // 
             // rubeCronUSBToolStripMenuItem3
             // 
             this.rubeCronUSBToolStripMenuItem3.Name = "rubeCronUSBToolStripMenuItem3";
             this.rubeCronUSBToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
             this.rubeCronUSBToolStripMenuItem3.Text = "&RubeCron USB";
+            this.rubeCronUSBToolStripMenuItem3.Click += new System.EventHandler(this.rubeCronUSBToolStripMenuItem3_Click);
             // 
             // noneToolStripMenuItem3
             // 
@@ -1044,6 +1061,7 @@
             this.noneToolStripMenuItem3.Name = "noneToolStripMenuItem3";
             this.noneToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
             this.noneToolStripMenuItem3.Text = "&None";
+            this.noneToolStripMenuItem3.Click += new System.EventHandler(this.noneToolStripMenuItem3_Click);
             // 
             // attachDiskJockeyToolStripMenuItem
             // 

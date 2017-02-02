@@ -431,5 +431,131 @@ namespace Em80
             drive3ToolStripMenuItem.Enabled = true;
             updateMemDisplay();
         }
+
+        private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            noneToolStripMenuItem1.Checked = true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.None);
+        }
+
+        private void iMSAISIOPortAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            iMSAISIOPortAToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.IMSAI_A);
+        }
+
+        private void iMSAISIOPortBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            iMSAISIOPortBToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.IMSAI_B);
+        }
+
+        private void altairSIOToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            altairSIOToolStripMenuItem1.Checked = true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.Altair);
+        }
+
+        private void diskJockeyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            diskJockeyToolStripMenuItem1.Checked= true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.DiskJockey);
+        }
+
+        private void rubeCronUSBToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port2ToolStripMenuItem1);
+            rubeCronUSBToolStripMenuItem1.Checked = true;
+            EmulatedSystem.sioPorts[1].setType(EmulatedSystem.sio.sioType.RubeCronUSB);
+        }
+
+        private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            noneToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.None);
+        }
+
+        private void iMSAISIOPortAToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            iMSAISIOPortAToolStripMenuItem1.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.IMSAI_A);
+        }
+
+        private void iMSAISIOPortBToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            iMSAISIOPortBToolStripMenuItem1.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.IMSAI_B);
+        }
+
+        private void altairSIOToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            altairSIOToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.Altair);
+        }
+
+        private void diskJockeyToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            diskJockeyToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.DiskJockey);
+        }
+
+        private void rubeCronUSBToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port3ToolStripMenuItem1);
+            rubeCronUSBToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[2].setType(EmulatedSystem.sio.sioType.RubeCronUSB);
+        }
+
+        private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            noneToolStripMenuItem3.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.None);
+        }
+
+        private void iMSAISIOPortAToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            iMSAISIOPortAToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.IMSAI_A);
+        }
+
+        private void iMSAISIOPortBToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            iMSAISIOPortBToolStripMenuItem2.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.IMSAI_B);
+        }
+
+        private void altairSIOToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            altairSIOToolStripMenuItem3.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.Altair);
+        }
+
+        private void diskJockeyToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            diskJockeyToolStripMenuItem3.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.DiskJockey);
+        }
+
+        private void rubeCronUSBToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port4ToolStripMenuItem1);
+            rubeCronUSBToolStripMenuItem3.Checked = true;
+            EmulatedSystem.sioPorts[3].setType(EmulatedSystem.sio.sioType.RubeCronUSB);
+        }
     }
 }
