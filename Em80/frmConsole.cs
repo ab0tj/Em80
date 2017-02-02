@@ -12,15 +12,14 @@ namespace Em80
 {
     public partial class frmConsole : Form
     {
+        private int serialPort;
+    
         public frmConsole()
         {
             InitializeComponent();
 
-            setConsolePort(consolePort.sio);
+            setConsolePort(0);
         }
-
-        public enum consolePort { sio, sio2, dj, none }
-        private consolePort serialPort;
 
         private void PrintChar(object sender, SerialEventArgs e)
         {
@@ -45,32 +44,14 @@ namespace Em80
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (serialPort == consolePort.sio) EmulatedSystem.sio.serialIn((byte)e.KeyChar);
-            else if (serialPort == consolePort.dj) EmulatedSystem.DiskJockey.serialIn((byte)e.KeyChar);
+            EmulatedSystem.sioPorts[serialPort].serialIn((byte)e.KeyChar);
         }
 
-        public void setConsolePort(consolePort port)
+        public void setConsolePort(int p)
         {
-            switch (port)
-            {
-                case consolePort.none:
-                    serialPort = consolePort.none;
-                    EmulatedSystem.sio.serialOut -= PrintChar;
-                    EmulatedSystem.DiskJockey.serialOut -= PrintChar;
-                    break;
-
-                case consolePort.sio:
-                    serialPort = consolePort.sio;
-                    EmulatedSystem.DiskJockey.serialOut -= PrintChar;
-                    EmulatedSystem.sio.serialOut += PrintChar;
-                    break;
-
-                case consolePort.dj:
-                    serialPort = consolePort.dj;
-                    EmulatedSystem.sio.serialOut -= PrintChar;
-                    EmulatedSystem.DiskJockey.serialOut += PrintChar;
-                    break;
-            }
+            EmulatedSystem.sioPorts[serialPort].serialOut -= PrintChar;
+            EmulatedSystem.sioPorts[p].serialOut += PrintChar;
+            serialPort = p;
         }
 
         private void frmConsole_FormClosing(object sender, FormClosingEventArgs e)

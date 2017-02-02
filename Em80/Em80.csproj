@@ -58,7 +58,6 @@
     <Compile Include="Classes\IO.cs" />
     <Compile Include="Classes\i8080Assembly.cs" />
     <Compile Include="Classes\Memory.cs" />
-    <Compile Include="Classes\SerialEvent.cs" />
     <Compile Include="Classes\SIO.cs" />
     <Compile Include="frmDebug.cs">
       <SubType>Form</SubType>

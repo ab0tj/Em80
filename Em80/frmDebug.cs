@@ -67,13 +67,10 @@ namespace Em80
 
         private void frmDebug_Load(object sender, EventArgs e)
         {
-            EmulatedSystem.DiskJockey.Init(0xf800);
-            EmulatedSystem.sio.Init();
             resetCPU();
             EmulatedSystem.memory.clear();
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
-            hexMemory.ByteProvider = provMem;
+            updateMemDisplay();
             hexMemory.Select();      
         }
 
@@ -91,12 +88,17 @@ namespace Em80
             Step();
         }
 
+        private void updateMemDisplay()
+        {
+            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
+            hexMemory.ByteProvider = provMem;
+        }
+
         private void Step()
         {
             EmulatedSystem.cpu.exec();
 
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
-            hexMemory.ByteProvider = provMem;
+            updateMemDisplay();
             updateRegisterDisplay();
         }
 
@@ -108,8 +110,7 @@ namespace Em80
         private void btnClear_Click(object sender, EventArgs e)
         {
             EmulatedSystem.memory.clear();
-            provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
-            hexMemory.ByteProvider = provMem;
+            updateMemDisplay();
         }
 
         private void btnRunStop_Click(object sender, EventArgs e)
@@ -165,8 +166,7 @@ namespace Em80
                 EmulatedSystem.cpu.running = false;
                 timerIPS.Enabled = false;
                 Text = "em80";
-                provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
-                hexMemory.ByteProvider = provMem;
+                updateMemDisplay();
                 updateRegisterDisplay();
 
                 txtRegA.ReadOnly = false;
@@ -238,8 +238,7 @@ namespace Em80
                             MessageBox.Show(ex.Message, "Error opening file", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
-                        provMem = new Be.Windows.Forms.DynamicByteProvider(EmulatedSystem.memory.getArray());
-                        hexMemory.ByteProvider = provMem;
+                        updateMemDisplay();
                         updateRegisterDisplay();
                     }
                 }
@@ -288,28 +287,12 @@ namespace Em80
             MessageBox.Show(EmulatedSystem.memory.getMap(), "Memory Map");
         }
 
-        private void sIOToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UncheckAllChildMenuItems (ToolStripMenuItem parentMenuItem)
         {
-            sIOToolStripMenuItem.Checked = true;
-            diskJockeyToolStripMenuItem.Checked = false;
-            noneToolStripMenuItem.Checked = false;
-            formConsole.setConsolePort(frmConsole.consolePort.sio);
-        }
-
-        private void diskJockeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            sIOToolStripMenuItem.Checked = false;
-            diskJockeyToolStripMenuItem.Checked = true;
-            noneToolStripMenuItem.Checked = false;
-            formConsole.setConsolePort(frmConsole.consolePort.dj);
-        }
-
-        private void noneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            sIOToolStripMenuItem.Checked = false;
-            diskJockeyToolStripMenuItem.Checked = false;
-            noneToolStripMenuItem.Checked = true;
-            formConsole.setConsolePort(frmConsole.consolePort.none);
+            foreach (ToolStripMenuItem item in parentMenuItem.DropDownItems)
+            {
+                item.Checked = false;
+            }
         }
 
         private void trackBarCycleDelay_ValueChanged(object sender, EventArgs e)
@@ -355,6 +338,98 @@ namespace Em80
         private void loadToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             loadDiskImage(3);
+        }
+
+        private void port1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(sourceToolStripMenuItem);
+            port1ToolStripMenuItem.Checked = true;
+            formConsole.setConsolePort(0);
+        }
+
+        private void port2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(sourceToolStripMenuItem);
+            port2ToolStripMenuItem.Checked = true;
+            formConsole.setConsolePort(1);
+        }
+
+        private void port3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(sourceToolStripMenuItem);
+            port3ToolStripMenuItem.Checked = true;
+            formConsole.setConsolePort(2);
+        }
+
+        private void port4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(sourceToolStripMenuItem);
+            port3ToolStripMenuItem.Checked = true;
+            formConsole.setConsolePort(3);
+        }
+
+        private void iMSAIPortAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            iMSAIPortAToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.IMSAI_A);
+        }
+
+        private void iMSAIPortBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            iMSAIPortBToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.IMSAI_B);
+        }
+
+        private void altairSIOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            altairSIOToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.Altair);
+        }
+
+        private void diskJockeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            diskJockeyToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.DiskJockey);
+        }
+
+        private void rubeCronUSBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            rubeCronUSBToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.RubeCronUSB);
+        }
+
+        private void noneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllChildMenuItems(port1ToolStripMenuItem1);
+            noneToolStripMenuItem.Checked = true;
+            EmulatedSystem.sioPorts[0].setType(EmulatedSystem.sio.sioType.None);
+        }
+
+        private void e000ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmulatedSystem.DiskJockey.Init(0xe000);
+            attachDiskJockeyToolStripMenuItem.Enabled = false;
+            drive0ToolStripMenuItem.Enabled = true;
+            drive1ToolStripMenuItem.Enabled = true;
+            drive2ToolStripMenuItem.Enabled = true;
+            drive3ToolStripMenuItem.Enabled = true;
+            updateMemDisplay();
+        }
+
+        private void f800ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmulatedSystem.DiskJockey.Init(0xf800);
+            attachDiskJockeyToolStripMenuItem.Enabled = false;
+            drive0ToolStripMenuItem.Enabled = true;
+            drive1ToolStripMenuItem.Enabled = true;
+            drive2ToolStripMenuItem.Enabled = true;
+            drive3ToolStripMenuItem.Enabled = true;
+            updateMemDisplay();
         }
     }
 }

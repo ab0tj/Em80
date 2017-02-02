@@ -115,12 +115,8 @@ namespace Em80
                         // bit 2: intrq
                         if (currentDrive.heads == 2 && currentDrive.ready) e.val &= 0xf7; // bit 3: n2sided
 
-                        if (!status.busy)
-                        {
-                            // toggle index bit
-                            if (!e.preview) status.index = !status.index;
-                            if (status.index) e.val |= 0x10;  // set index bit
-                        }
+                        if (!e.preview) status.index = !status.index;
+                        if (status.index) e.val |= 0x10;  // set index bit
 
                         if (drives[selectedDrive].ready) e.val |= 0x80; // bit 7: ready
                         break;
@@ -161,7 +157,6 @@ namespace Em80
                         {
                             SerialEventArgs ev = new SerialEventArgs();
                             ev.data = (byte)~e.val;
-                            ev.port = 0;
                             serialOut(null, ev);
                         }
                         break;

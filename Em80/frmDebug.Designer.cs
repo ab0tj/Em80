@@ -73,10 +73,6 @@
             this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diskJockeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +97,43 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtBreakpoint = new System.Windows.Forms.TextBox();
             this.checkBreakpoint = new System.Windows.Forms.CheckBox();
+            this.sourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.port1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.port2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.port3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.port4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.port1ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.port2ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.port3ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.port4ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAIPortAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAIPortBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.altairSIOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskJockeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rubeCronUSBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.altairSIOToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskJockeyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rubeCronUSBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortAToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.altairSIOToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskJockeyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rubeCronUSBToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortAToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.iMSAISIOPortBToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.altairSIOToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskJockeyToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rubeCronUSBToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.attachDiskJockeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.e000ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.f800ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupRegisters.SuspendLayout();
             this.groupMemory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCycleDelay)).BeginInit();
@@ -501,6 +534,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.consoleToolStripMenuItem,
+            this.serialToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.diskToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -556,39 +590,6 @@
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
-            // sourceToolStripMenuItem
-            // 
-            this.sourceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sIOToolStripMenuItem,
-            this.diskJockeyToolStripMenuItem,
-            this.noneToolStripMenuItem});
-            this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
-            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sourceToolStripMenuItem.Text = "&Source";
-            // 
-            // sIOToolStripMenuItem
-            // 
-            this.sIOToolStripMenuItem.Checked = true;
-            this.sIOToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sIOToolStripMenuItem.Name = "sIOToolStripMenuItem";
-            this.sIOToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.sIOToolStripMenuItem.Text = "&SIO";
-            this.sIOToolStripMenuItem.Click += new System.EventHandler(this.sIOToolStripMenuItem_Click);
-            // 
-            // diskJockeyToolStripMenuItem
-            // 
-            this.diskJockeyToolStripMenuItem.Name = "diskJockeyToolStripMenuItem";
-            this.diskJockeyToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.diskJockeyToolStripMenuItem.Text = "&DiskJockey";
-            this.diskJockeyToolStripMenuItem.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem_Click);
-            // 
-            // noneToolStripMenuItem
-            // 
-            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.noneToolStripMenuItem.Text = "&None";
-            this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -601,7 +602,7 @@
             // memoryClearToolStripMenuItem
             // 
             this.memoryClearToolStripMenuItem.Name = "memoryClearToolStripMenuItem";
-            this.memoryClearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.memoryClearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.memoryClearToolStripMenuItem.Text = "&Clear";
             this.memoryClearToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.memoryClearToolStripMenuItem.Click += new System.EventHandler(this.btnClear_Click);
@@ -609,13 +610,14 @@
             // memoryMapToolStripMenuItem
             // 
             this.memoryMapToolStripMenuItem.Name = "memoryMapToolStripMenuItem";
-            this.memoryMapToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.memoryMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.memoryMapToolStripMenuItem.Text = "&Map";
             this.memoryMapToolStripMenuItem.Click += new System.EventHandler(this.memoryMapToolStripMenuItem_Click);
             // 
             // diskToolStripMenuItem
             // 
             this.diskToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.attachDiskJockeyToolStripMenuItem,
             this.drive0ToolStripMenuItem,
             this.drive1ToolStripMenuItem,
             this.drive2ToolStripMenuItem,
@@ -629,21 +631,22 @@
             this.drive0ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem1,
             this.ejectToolStripMenuItem});
+            this.drive0ToolStripMenuItem.Enabled = false;
             this.drive0ToolStripMenuItem.Name = "drive0ToolStripMenuItem";
-            this.drive0ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.drive0ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.drive0ToolStripMenuItem.Text = "Drive &0";
             // 
             // loadToolStripMenuItem1
             // 
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem1.Text = "&Load";
             this.loadToolStripMenuItem1.Click += new System.EventHandler(this.loadToolStripMenuItem1_Click);
             // 
             // ejectToolStripMenuItem
             // 
             this.ejectToolStripMenuItem.Name = "ejectToolStripMenuItem";
-            this.ejectToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ejectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejectToolStripMenuItem.Text = "&Eject";
             // 
             // drive1ToolStripMenuItem
@@ -651,8 +654,9 @@
             this.drive1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem2,
             this.ejectToolStripMenuItem1});
+            this.drive1ToolStripMenuItem.Enabled = false;
             this.drive1ToolStripMenuItem.Name = "drive1ToolStripMenuItem";
-            this.drive1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.drive1ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.drive1ToolStripMenuItem.Text = "Drive &1";
             // 
             // loadToolStripMenuItem2
@@ -673,8 +677,9 @@
             this.drive2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem3,
             this.ejectToolStripMenuItem2});
+            this.drive2ToolStripMenuItem.Enabled = false;
             this.drive2ToolStripMenuItem.Name = "drive2ToolStripMenuItem";
-            this.drive2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.drive2ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.drive2ToolStripMenuItem.Text = "Drive &2";
             // 
             // loadToolStripMenuItem3
@@ -695,8 +700,9 @@
             this.drive3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem4,
             this.ejectToolStripMenuItem3});
+            this.drive3ToolStripMenuItem.Enabled = false;
             this.drive3ToolStripMenuItem.Name = "drive3ToolStripMenuItem";
-            this.drive3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.drive3ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.drive3ToolStripMenuItem.Text = "Drive &3";
             // 
             // loadToolStripMenuItem4
@@ -776,6 +782,291 @@
             this.checkBreakpoint.Size = new System.Drawing.Size(15, 14);
             this.checkBreakpoint.TabIndex = 0;
             this.checkBreakpoint.UseVisualStyleBackColor = true;
+            // 
+            // sourceToolStripMenuItem
+            // 
+            this.sourceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.port1ToolStripMenuItem,
+            this.port2ToolStripMenuItem,
+            this.port3ToolStripMenuItem,
+            this.port4ToolStripMenuItem});
+            this.sourceToolStripMenuItem.Name = "sourceToolStripMenuItem";
+            this.sourceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sourceToolStripMenuItem.Text = "S&ource";
+            // 
+            // port1ToolStripMenuItem
+            // 
+            this.port1ToolStripMenuItem.Checked = true;
+            this.port1ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.port1ToolStripMenuItem.Name = "port1ToolStripMenuItem";
+            this.port1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.port1ToolStripMenuItem.Text = "Port &1";
+            this.port1ToolStripMenuItem.Click += new System.EventHandler(this.port1ToolStripMenuItem_Click);
+            // 
+            // port2ToolStripMenuItem
+            // 
+            this.port2ToolStripMenuItem.Name = "port2ToolStripMenuItem";
+            this.port2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.port2ToolStripMenuItem.Text = "Port &2";
+            this.port2ToolStripMenuItem.Click += new System.EventHandler(this.port2ToolStripMenuItem_Click);
+            // 
+            // port3ToolStripMenuItem
+            // 
+            this.port3ToolStripMenuItem.Name = "port3ToolStripMenuItem";
+            this.port3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.port3ToolStripMenuItem.Text = "Port &3";
+            this.port3ToolStripMenuItem.Click += new System.EventHandler(this.port3ToolStripMenuItem_Click);
+            // 
+            // port4ToolStripMenuItem
+            // 
+            this.port4ToolStripMenuItem.Name = "port4ToolStripMenuItem";
+            this.port4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.port4ToolStripMenuItem.Text = "Port &4";
+            this.port4ToolStripMenuItem.Click += new System.EventHandler(this.port4ToolStripMenuItem_Click);
+            // 
+            // serialToolStripMenuItem
+            // 
+            this.serialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.port1ToolStripMenuItem1,
+            this.port2ToolStripMenuItem1,
+            this.port3ToolStripMenuItem1,
+            this.port4ToolStripMenuItem1});
+            this.serialToolStripMenuItem.Name = "serialToolStripMenuItem";
+            this.serialToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.serialToolStripMenuItem.Text = "&Serial";
+            // 
+            // port1ToolStripMenuItem1
+            // 
+            this.port1ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneToolStripMenuItem,
+            this.iMSAIPortAToolStripMenuItem,
+            this.iMSAIPortBToolStripMenuItem,
+            this.altairSIOToolStripMenuItem,
+            this.diskJockeyToolStripMenuItem,
+            this.rubeCronUSBToolStripMenuItem});
+            this.port1ToolStripMenuItem1.Name = "port1ToolStripMenuItem1";
+            this.port1ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.port1ToolStripMenuItem1.Text = "Port &1";
+            // 
+            // port2ToolStripMenuItem1
+            // 
+            this.port2ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneToolStripMenuItem1,
+            this.iMSAISIOPortAToolStripMenuItem,
+            this.iMSAISIOPortBToolStripMenuItem,
+            this.altairSIOToolStripMenuItem1,
+            this.diskJockeyToolStripMenuItem1,
+            this.rubeCronUSBToolStripMenuItem1});
+            this.port2ToolStripMenuItem1.Name = "port2ToolStripMenuItem1";
+            this.port2ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.port2ToolStripMenuItem1.Text = "Port &2";
+            // 
+            // port3ToolStripMenuItem1
+            // 
+            this.port3ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneToolStripMenuItem2,
+            this.iMSAISIOPortAToolStripMenuItem1,
+            this.iMSAISIOPortBToolStripMenuItem1,
+            this.altairSIOToolStripMenuItem2,
+            this.diskJockeyToolStripMenuItem2,
+            this.rubeCronUSBToolStripMenuItem2});
+            this.port3ToolStripMenuItem1.Name = "port3ToolStripMenuItem1";
+            this.port3ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.port3ToolStripMenuItem1.Text = "Port &3";
+            // 
+            // port4ToolStripMenuItem1
+            // 
+            this.port4ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneToolStripMenuItem3,
+            this.iMSAISIOPortAToolStripMenuItem2,
+            this.iMSAISIOPortBToolStripMenuItem2,
+            this.altairSIOToolStripMenuItem3,
+            this.diskJockeyToolStripMenuItem3,
+            this.rubeCronUSBToolStripMenuItem3});
+            this.port4ToolStripMenuItem1.Name = "port4ToolStripMenuItem1";
+            this.port4ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.port4ToolStripMenuItem1.Text = "Port &4";
+            // 
+            // iMSAIPortAToolStripMenuItem
+            // 
+            this.iMSAIPortAToolStripMenuItem.Name = "iMSAIPortAToolStripMenuItem";
+            this.iMSAIPortAToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.iMSAIPortAToolStripMenuItem.Text = "&IMSAI SIO Port A";
+            this.iMSAIPortAToolStripMenuItem.Click += new System.EventHandler(this.iMSAIPortAToolStripMenuItem_Click);
+            // 
+            // iMSAIPortBToolStripMenuItem
+            // 
+            this.iMSAIPortBToolStripMenuItem.Name = "iMSAIPortBToolStripMenuItem";
+            this.iMSAIPortBToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.iMSAIPortBToolStripMenuItem.Text = "I&MSAI SIO Port B";
+            this.iMSAIPortBToolStripMenuItem.Click += new System.EventHandler(this.iMSAIPortBToolStripMenuItem_Click);
+            // 
+            // altairSIOToolStripMenuItem
+            // 
+            this.altairSIOToolStripMenuItem.Name = "altairSIOToolStripMenuItem";
+            this.altairSIOToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.altairSIOToolStripMenuItem.Text = "&Altair SIO";
+            this.altairSIOToolStripMenuItem.Click += new System.EventHandler(this.altairSIOToolStripMenuItem_Click);
+            // 
+            // diskJockeyToolStripMenuItem
+            // 
+            this.diskJockeyToolStripMenuItem.Name = "diskJockeyToolStripMenuItem";
+            this.diskJockeyToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.diskJockeyToolStripMenuItem.Text = "&Disk Jockey";
+            this.diskJockeyToolStripMenuItem.Click += new System.EventHandler(this.diskJockeyToolStripMenuItem_Click);
+            // 
+            // rubeCronUSBToolStripMenuItem
+            // 
+            this.rubeCronUSBToolStripMenuItem.Name = "rubeCronUSBToolStripMenuItem";
+            this.rubeCronUSBToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.rubeCronUSBToolStripMenuItem.Text = "&RubeCron USB";
+            this.rubeCronUSBToolStripMenuItem.Click += new System.EventHandler(this.rubeCronUSBToolStripMenuItem_Click);
+            // 
+            // noneToolStripMenuItem
+            // 
+            this.noneToolStripMenuItem.Checked = true;
+            this.noneToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.noneToolStripMenuItem.Text = "&None";
+            this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
+            // 
+            // iMSAISIOPortAToolStripMenuItem
+            // 
+            this.iMSAISIOPortAToolStripMenuItem.Name = "iMSAISIOPortAToolStripMenuItem";
+            this.iMSAISIOPortAToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortAToolStripMenuItem.Text = "&IMSAI SIO Port A";
+            // 
+            // iMSAISIOPortBToolStripMenuItem
+            // 
+            this.iMSAISIOPortBToolStripMenuItem.Name = "iMSAISIOPortBToolStripMenuItem";
+            this.iMSAISIOPortBToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortBToolStripMenuItem.Text = "I&MSAI SIO Port B";
+            // 
+            // altairSIOToolStripMenuItem1
+            // 
+            this.altairSIOToolStripMenuItem1.Name = "altairSIOToolStripMenuItem1";
+            this.altairSIOToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.altairSIOToolStripMenuItem1.Text = "&Altair SIO";
+            // 
+            // diskJockeyToolStripMenuItem1
+            // 
+            this.diskJockeyToolStripMenuItem1.Name = "diskJockeyToolStripMenuItem1";
+            this.diskJockeyToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.diskJockeyToolStripMenuItem1.Text = "&Disk Jockey";
+            // 
+            // rubeCronUSBToolStripMenuItem1
+            // 
+            this.rubeCronUSBToolStripMenuItem1.Name = "rubeCronUSBToolStripMenuItem1";
+            this.rubeCronUSBToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.rubeCronUSBToolStripMenuItem1.Text = "&RubeCron USB";
+            // 
+            // noneToolStripMenuItem1
+            // 
+            this.noneToolStripMenuItem1.Checked = true;
+            this.noneToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.noneToolStripMenuItem1.Name = "noneToolStripMenuItem1";
+            this.noneToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.noneToolStripMenuItem1.Text = "&None";
+            // 
+            // iMSAISIOPortAToolStripMenuItem1
+            // 
+            this.iMSAISIOPortAToolStripMenuItem1.Name = "iMSAISIOPortAToolStripMenuItem1";
+            this.iMSAISIOPortAToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortAToolStripMenuItem1.Text = "&IMSAI SIO Port A";
+            // 
+            // iMSAISIOPortBToolStripMenuItem1
+            // 
+            this.iMSAISIOPortBToolStripMenuItem1.Name = "iMSAISIOPortBToolStripMenuItem1";
+            this.iMSAISIOPortBToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortBToolStripMenuItem1.Text = "I&MSAI SIO Port B";
+            // 
+            // altairSIOToolStripMenuItem2
+            // 
+            this.altairSIOToolStripMenuItem2.Name = "altairSIOToolStripMenuItem2";
+            this.altairSIOToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.altairSIOToolStripMenuItem2.Text = "&Altair SIO";
+            // 
+            // diskJockeyToolStripMenuItem2
+            // 
+            this.diskJockeyToolStripMenuItem2.Name = "diskJockeyToolStripMenuItem2";
+            this.diskJockeyToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.diskJockeyToolStripMenuItem2.Text = "&Disk Jockey";
+            // 
+            // rubeCronUSBToolStripMenuItem2
+            // 
+            this.rubeCronUSBToolStripMenuItem2.Name = "rubeCronUSBToolStripMenuItem2";
+            this.rubeCronUSBToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.rubeCronUSBToolStripMenuItem2.Text = "&RubeCron USB";
+            // 
+            // noneToolStripMenuItem2
+            // 
+            this.noneToolStripMenuItem2.Checked = true;
+            this.noneToolStripMenuItem2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.noneToolStripMenuItem2.Name = "noneToolStripMenuItem2";
+            this.noneToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.noneToolStripMenuItem2.Text = "&None";
+            // 
+            // iMSAISIOPortAToolStripMenuItem2
+            // 
+            this.iMSAISIOPortAToolStripMenuItem2.Name = "iMSAISIOPortAToolStripMenuItem2";
+            this.iMSAISIOPortAToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortAToolStripMenuItem2.Text = "&IMSAI SIO Port A";
+            // 
+            // iMSAISIOPortBToolStripMenuItem2
+            // 
+            this.iMSAISIOPortBToolStripMenuItem2.Name = "iMSAISIOPortBToolStripMenuItem2";
+            this.iMSAISIOPortBToolStripMenuItem2.Size = new System.Drawing.Size(162, 22);
+            this.iMSAISIOPortBToolStripMenuItem2.Text = "I&MSAI SIO Port B";
+            // 
+            // altairSIOToolStripMenuItem3
+            // 
+            this.altairSIOToolStripMenuItem3.Name = "altairSIOToolStripMenuItem3";
+            this.altairSIOToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
+            this.altairSIOToolStripMenuItem3.Text = "&Altair SIO";
+            // 
+            // diskJockeyToolStripMenuItem3
+            // 
+            this.diskJockeyToolStripMenuItem3.Name = "diskJockeyToolStripMenuItem3";
+            this.diskJockeyToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
+            this.diskJockeyToolStripMenuItem3.Text = "&Disk Jockey";
+            // 
+            // rubeCronUSBToolStripMenuItem3
+            // 
+            this.rubeCronUSBToolStripMenuItem3.Name = "rubeCronUSBToolStripMenuItem3";
+            this.rubeCronUSBToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
+            this.rubeCronUSBToolStripMenuItem3.Text = "&RubeCron USB";
+            // 
+            // noneToolStripMenuItem3
+            // 
+            this.noneToolStripMenuItem3.Checked = true;
+            this.noneToolStripMenuItem3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.noneToolStripMenuItem3.Name = "noneToolStripMenuItem3";
+            this.noneToolStripMenuItem3.Size = new System.Drawing.Size(162, 22);
+            this.noneToolStripMenuItem3.Text = "&None";
+            // 
+            // attachDiskJockeyToolStripMenuItem
+            // 
+            this.attachDiskJockeyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.e000ToolStripMenuItem,
+            this.f800ToolStripMenuItem});
+            this.attachDiskJockeyToolStripMenuItem.Name = "attachDiskJockeyToolStripMenuItem";
+            this.attachDiskJockeyToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.attachDiskJockeyToolStripMenuItem.Text = "&Attach Disk Jockey";
+            // 
+            // e000ToolStripMenuItem
+            // 
+            this.e000ToolStripMenuItem.Name = "e000ToolStripMenuItem";
+            this.e000ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.e000ToolStripMenuItem.Text = "&E000";
+            this.e000ToolStripMenuItem.Click += new System.EventHandler(this.e000ToolStripMenuItem_Click);
+            // 
+            // f800ToolStripMenuItem
+            // 
+            this.f800ToolStripMenuItem.Name = "f800ToolStripMenuItem";
+            this.f800ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.f800ToolStripMenuItem.Text = "&F800";
+            this.f800ToolStripMenuItem.Click += new System.EventHandler(this.f800ToolStripMenuItem_Click);
             // 
             // frmDebug
             // 
@@ -864,10 +1155,6 @@
         private System.Windows.Forms.Label lblInstruction;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memoryMapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sIOToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
         private System.Windows.Forms.Timer timerIPS;
         private System.Windows.Forms.ToolStripMenuItem diskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drive0ToolStripMenuItem;
@@ -887,6 +1174,43 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtBreakpoint;
         private System.Windows.Forms.CheckBox checkBreakpoint;
+        private System.Windows.Forms.ToolStripMenuItem sourceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port1ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem iMSAIPortAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iMSAIPortBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem altairSIOToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rubeCronUSBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem port2ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem port3ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem port4ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem altairSIOToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem rubeCronUSBToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortAToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortBToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem altairSIOToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem rubeCronUSBToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortAToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem iMSAISIOPortBToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem altairSIOToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem diskJockeyToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem rubeCronUSBToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem attachDiskJockeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem e000ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem f800ToolStripMenuItem;
     }
 }
 
